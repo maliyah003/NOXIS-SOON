@@ -212,7 +212,46 @@ body {
     margin: 0 auto;
 }
 
+.contact-email-container {
+    margin-top: 1.5rem;
+}
 
+.contact-email {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: var(--transition-smooth);
+    display: inline-block;
+    position: relative;
+    letter-spacing: 0.02em;
+}
+
+.contact-email::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.contact-email:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.contact-email:hover {
+    text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
 
 /* Footer & social icon components */
 .footer-section {
