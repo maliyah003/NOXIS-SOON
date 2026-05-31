@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Coming Soon | A New Era Begins</title>
+    <meta name="description" content="Our exciting new website is coming soon. Stay tuned for something amazing.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta property="og:description"
+        content="Our exciting new website is coming soon. Stay tuned for something amazing.">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NOXIS | Coming Soon">
+    <meta name="twitter:description"
+        content="Our exciting new website is coming soon. Stay tuned for something amazing.">
+
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (Optional, but we use custom Vanilla CSS for absolute control & premium feel) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Subtle animated grid overlay for depth -->
+    <div class="bg-grid-overlay" id="gridOverlay"></div>
+
+    <!-- Radial glowing lights in background -->
+    <div class="glow-light glow-purple" id="glowPurple"></div>
+    <div class="glow-light glow-blue" id="glowBlue"></div>
+
+    <div class="page-container">
+        <!-- Main content area -->
+        <main class="main-content" id="mainContent">
+            <!-- Centered card/wrapper -->
+            <div class="coming-soon-card" id="comingSoonCard">
+
+                <!-- GIF Container / Visual Centerpiece -->
+                <!-- 
+                  INSTRUCTIONS: 
+                  Place your own GIF in the 'assets' folder and name it 'coming-soon.gif' 
+                  to automatically replace the placeholder visual!
+                -->
+                <div class="gif-container" id="gifContainer">
+                    <img src="assets/coming-soon.gif" alt="Coming Soon Animation" class="coming-soon-gif"
+                        id="comingSoonGif">
+                </div>
+
+                <!-- Text Header -->
+                <header class="header-section">
+                    <h1 class="main-title" id="mainTitle">Creating Something Extraordinary</h1>
+                    <p class="subtitle" id="subtitle">We're crafting an exceptional digital experience. Stay tuned for
+                        something amazing!</p>
+                </header>
+
+            </div>
+        </main>
+
+        <!-- Footer with social icons and copyrights -->
+        <footer class="footer-section" id="footerSection">
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@usenoxis?_r=1&_t=ZS-96ms87o3Yl2" class="social-link"
+                    aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/usenoxis" class="social-link" aria-label="Instagram" target="_blank"
+                    rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/company/123414166/admin/dashboard/" class="social-link"
+                    aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="https://web.facebook.com/profile.php?id=61590402002664" class="social-link"
+                    aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">&copy; 2026. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Client-side Interactive Logic -->
+    <script>
+
+        // Add visual tracking of mouse cursor on desktop for custom glowing lights
+        document.addEventListener('mousemove', (e) => {
+            const glowPurple = document.getElementById('glowPurple');
+            const glowBlue = document.getElementById('glowBlue');
+
+            if (glowPurple && glowBlue) {
+                const x = e.clientX;
+                const y = e.clientY;
+
+                // Smoothly shift glow spots based on mouse location
+                glowPurple.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+                glowBlue.style.transform = `translate(${-x * 0.03}px, ${-y * 0.03}px)`;
+            }
+        });
+    </script>
+</body>
+
+</html>
