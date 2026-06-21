@@ -75,37 +75,12 @@
 
         /* ---------- Layout shell ---------- */
         .trajectory {
-            position: fixed;
-            top: 0;
-            left: 48px;
-            width: 1px;
-            height: 100%;
-            background: var(--line);
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .trajectory::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -1.5px;
-            width: 4px;
-            height: var(--progress, 0%);
-            background: linear-gradient(180deg, var(--fletch), var(--brass));
-            box-shadow: 0 0 12px rgba(15, 184, 189, 0.45);
-            transition: height 0.1s linear;
-        }
-
-        @media (max-width: 900px) {
-            .trajectory {
-                left: 20px;
-            }
+            display: none !important;
         }
 
         section,
         footer {
-            padding-left: 100px;
+            padding-left: 64px;
             padding-right: 64px;
             position: relative;
         }
@@ -114,7 +89,7 @@
 
             section,
             footer {
-                padding-left: 52px;
+                padding-left: 24px;
                 padding-right: 24px;
             }
         }
@@ -408,6 +383,41 @@
                 font-size: 0.65rem !important;
                 padding: 8px 14px !important;
                 flex-shrink: 0 !important;
+            }
+
+            .footer-wordmark {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+                padding-top: 40px !important;
+                padding-bottom: 20px !important;
+            }
+
+            /* Product Highlight Card Mobile Optimization */
+            .product-highlight {
+                padding: 48px 24px !important;
+                border-radius: 20px !important;
+            }
+
+            .ph-logo {
+                height: auto !important;
+                max-height: 60px !important;
+                max-width: 85% !important;
+            }
+
+            .ph-text h3 {
+                font-size: 1.5rem !important;
+                flex-wrap: wrap !important;
+                gap: 10px !important;
+            }
+
+            .ph-text p {
+                font-size: 0.95rem !important;
+                line-height: 1.4 !important;
+            }
+
+            .ph-badge {
+                font-size: 0.7rem !important;
+                padding: 3px 10px !important;
             }
         }
 
@@ -705,7 +715,7 @@
         .node::before {
             content: '';
             position: absolute;
-            left: -64px;
+            left: -28px;
             top: 6px;
             width: 11px;
             height: 11px;
@@ -722,7 +732,7 @@
 
         @media (max-width: 900px) {
             .node::before {
-                left: -36px;
+                left: -16px;
             }
         }
 
@@ -1147,9 +1157,10 @@
         /* ---------- Footer wordmark ---------- */
         .footer-wordmark {
             width: 100%;
-            padding: 80px 0 0;
+            padding: 80px 64px 40px;
             overflow: hidden;
-            display: block;
+            display: flex;
+            justify-content: center;
             line-height: 0;
             color: var(--brass);
         }
@@ -1158,16 +1169,17 @@
             display: block;
             width: 100%;
             cursor: pointer;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .footer-wordmark a:hover {
+            transform: scale(1.01);
         }
 
         .footer-wordmark svg {
             width: 100%;
             height: auto;
             display: block;
-            opacity: 1;
-        }
-
-        .footer-wordmark:hover svg {
             opacity: 1;
         }
 
