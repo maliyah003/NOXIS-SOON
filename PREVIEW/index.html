@@ -864,7 +864,8 @@
         .waitlist-form.hidden, 
         #show-waitlist-btn.hidden,
         .waitlist-success.hidden,
-        .waitlist-error.hidden {
+        .waitlist-error.hidden,
+        .waitlist-exists.hidden { 
             display: none;
             opacity: 0;
             pointer-events: none;
@@ -921,6 +922,17 @@
             left: 50%;
             transform: translateX(-50%);
             white-space: nowrap;
+        }
+
+        .waitlist-exists {
+            color: #FFC85E; 
+            font-size: 0.75rem;
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            animation: fadeUp 0.3s var(--ease) forwards;
         }
 
         /* ---------- Workflow / trajectory path section ---------- */
@@ -1399,7 +1411,6 @@
                         <p>All you need for your retail business.</p>
                     </div>
                     
-                    <!-- Waitlist UI -->
                     <div class="waitlist-container">
                         <button id="show-waitlist-btn" class="btn-waitlist">Join Waitlist</button>
                         
@@ -1414,6 +1425,7 @@
                         
                         <p id="waitlist-success" class="waitlist-success hidden">You're on the list!</p>
                         <p id="waitlist-error" class="waitlist-error hidden">Please enter a valid email address.</p>
+                        <p id="waitlist-exists" class="waitlist-exists hidden">This email is already on the waitlist.</p>
                     </div>
                 </div>
                 <div class="ph-glow"></div>
@@ -1667,38 +1679,61 @@
         const waitlistForm = document.getElementById('waitlist-form');
         const waitlistSuccess = document.getElementById('waitlist-success');
         const waitlistError = document.getElementById('waitlist-error');
+        const waitlistExists = document.getElementById('waitlist-exists'); 
         const emailInput = document.getElementById('waitlist-email');
         
         // Strict Email Regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        // =====================================================================
+        // PRE-EXISTING EMAILS: Add any already collected emails to this list below.
+        // Make sure to wrap each email in quotes and separate them with a comma.
+        // =====================================================================
+        const preExistingEmails = [
+            "hello.malindu@gmail.com",
+            "hello@usenoxis.com",
+            "senilkadahanayaka@gmail.com",
+            "malindugimhana8@gmail.com",
+            // "add_another_email_here@example.com",
+        ].map(e => e.toLowerCase()); // Ensures all emails match regardless of caps
+
         if (showWaitlistBtn && waitlistForm) {
-            // Show the input field when clicking "Join Waitlist"
+            
             showWaitlistBtn.addEventListener('click', () => {
                 showWaitlistBtn.classList.add('hidden');
                 waitlistForm.classList.remove('hidden');
                 emailInput.focus();
             });
             
-            // Clear error styling when user starts typing again
+            // Clear errors when typing
             emailInput.addEventListener('input', () => {
                 waitlistError.classList.add('hidden');
+                waitlistExists.classList.add('hidden'); 
                 emailInput.style.borderColor = 'var(--card-border)';
             });
 
-            // Handle the form submission in the background
             waitlistForm.addEventListener('submit', async (e) => {
-                e.preventDefault(); // Prevent page reload
+                e.preventDefault(); 
                 
-                const emailVal = emailInput.value.trim();
+                const emailVal = emailInput.value.trim().toLowerCase();
                 
-                // Regex Validation Check
+                // 1. Regex Validation Check
                 if (!emailRegex.test(emailVal)) {
                     waitlistError.classList.remove('hidden');
                     emailInput.style.borderColor = '#FF5E5E';
-                    return; // Stop the function here, don't send request
+                    return; 
+                }
+
+                // 2. Local Storage & Hardcoded Check (Did they already submit this?)
+                const savedEmails = JSON.parse(localStorage.getItem('noxis_waitlist') || '[]');
+                
+                if (preExistingEmails.includes(emailVal) || savedEmails.includes(emailVal)) {
+                    waitlistExists.classList.remove('hidden');
+                    emailInput.style.borderColor = '#FFC85E';
+                    return; // Stop here, don't send to Formspree
                 }
                 
+                // 3. Proceed with submission
                 const submitBtn = waitlistForm.querySelector('button[type="submit"]');
                 submitBtn.style.opacity = '0.5';
                 submitBtn.style.pointerEvents = 'none';
@@ -1713,8 +1748,14 @@
                     });
 
                     if (response.ok) {
+                        // Save the email to local storage so we remember them next time
+                        savedEmails.push(emailVal);
+                        localStorage.setItem('noxis_waitlist', JSON.stringify(savedEmails));
+
+                        // Update UI
                         waitlistForm.classList.add('hidden');
                         waitlistError.classList.add('hidden');
+                        waitlistExists.classList.add('hidden');
                         waitlistSuccess.classList.remove('hidden');
                     } else {
                         alert("Oops! There was a problem submitting your email.");
