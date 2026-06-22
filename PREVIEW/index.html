@@ -248,11 +248,11 @@
                 top: 14px !important;
                 width: max-content !important;
                 justify-content: center !important;
-                padding: 6px 8px 6px 16px !important; /* Balanced left/right pad */
+                padding: 6px 8px 6px 16px !important; 
                 background: #FFFFFF;
                 border-radius: 999px;
                 box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-                gap: 16px !important; /* Uniform gap applied to logo and nav */
+                gap: 16px !important; 
             }
 
             header .spacer {
@@ -272,7 +272,7 @@
 
             header .logo-svg {
                 height: 24px !important;
-                width: 15px !important; /* Forces the box to shrink entirely around the "N" to remove empty space */
+                width: 15px !important; 
             }
 
             header #logo-oxis {
@@ -288,7 +288,7 @@
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                gap: 16px !important; /* Uniform gap */
+                gap: 16px !important; 
             }
 
             nav {
@@ -299,7 +299,7 @@
 
             nav ul {
                 display: flex !important;
-                gap: 16px !important; /* Uniform gap for nav links */
+                gap: 16px !important; 
                 justify-content: center !important;
                 width: auto !important;
                 margin: 0;
@@ -357,7 +357,7 @@
         @media (max-width: 360px) {
             header {
                 padding: 6px 6px 6px 12px !important;
-                gap: 10px !important; /* Tightens gaps uniformly for extra-small screens */
+                gap: 10px !important; 
             }
             .header-right {
                 gap: 10px !important;
@@ -817,6 +817,110 @@
             opacity: 1;
             width: 600px;
             height: 600px;
+        }
+
+        /* ---------- Waitlist UI ---------- */
+        .waitlist-container {
+            margin-top: 16px;
+            height: 44px; /* Fixed height to prevent layout jumps */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .btn-waitlist {
+            background: rgba(31, 239, 244, 0.08);
+            border: 1px solid rgba(31, 239, 244, 0.3);
+            color: var(--brass);
+            font-family: 'Google Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 10px 24px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.35s var(--ease);
+        }
+
+        .btn-waitlist:hover {
+            background: var(--brass);
+            color: #06282A;
+            box-shadow: 0 8px 24px rgba(31, 239, 244, 0.3);
+            transform: translateY(-2px);
+            border-color: var(--brass);
+        }
+
+        .waitlist-form {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.4s var(--ease);
+        }
+
+        .waitlist-form.hidden, 
+        #show-waitlist-btn.hidden,
+        .waitlist-success.hidden,
+        .waitlist-error.hidden {
+            display: none;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .waitlist-input {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--parchment);
+            font-family: 'Google Sans', sans-serif;
+            font-size: 0.9rem;
+            padding: 10px 16px;
+            border-radius: 999px;
+            width: 220px;
+            outline: none;
+            transition: border-color 0.3s var(--ease);
+        }
+
+        .waitlist-input:focus {
+            border-color: var(--brass);
+        }
+
+        .waitlist-submit {
+            background: var(--brass);
+            color: #06282A;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+        }
+
+        .waitlist-submit:hover {
+            transform: translateX(2px);
+            box-shadow: 0 4px 12px rgba(15, 184, 189, 0.3);
+        }
+
+        .waitlist-success {
+            color: var(--fletch);
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: fadeUp 0.4s var(--ease) forwards;
+        }
+
+        .waitlist-error {
+            color: #FF5E5E;
+            font-size: 0.75rem;
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
 
         /* ---------- Workflow / trajectory path section ---------- */
@@ -1294,6 +1398,23 @@
                         <h3>RetailIQ <span class="ph-badge">Coming Soon</span></h3>
                         <p>All you need for your retail business.</p>
                     </div>
+                    
+                    <!-- Waitlist UI -->
+                    <div class="waitlist-container">
+                        <button id="show-waitlist-btn" class="btn-waitlist">Join Waitlist</button>
+                        
+                        <form id="waitlist-form" action="https://formspree.io/f/mwvdkkna" method="POST" class="waitlist-form hidden">
+                            <input type="email" name="email" id="waitlist-email" placeholder="Enter your email" required class="waitlist-input">
+                            <button type="submit" class="waitlist-submit">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M2 8h12M9 3l5 5-5 5" />
+                                </svg>
+                            </button>
+                        </form>
+                        
+                        <p id="waitlist-success" class="waitlist-success hidden">You're on the list!</p>
+                        <p id="waitlist-error" class="waitlist-error hidden">Please enter a valid email address.</p>
+                    </div>
                 </div>
                 <div class="ph-glow"></div>
             </div>
@@ -1539,6 +1660,73 @@
                 });
             }, { threshold: 0 });
             heroObserver.observe(heroEl);
+        }
+
+        // ── Waitlist Form Logic & Validation ───────────────────────────────────
+        const showWaitlistBtn = document.getElementById('show-waitlist-btn');
+        const waitlistForm = document.getElementById('waitlist-form');
+        const waitlistSuccess = document.getElementById('waitlist-success');
+        const waitlistError = document.getElementById('waitlist-error');
+        const emailInput = document.getElementById('waitlist-email');
+        
+        // Strict Email Regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (showWaitlistBtn && waitlistForm) {
+            // Show the input field when clicking "Join Waitlist"
+            showWaitlistBtn.addEventListener('click', () => {
+                showWaitlistBtn.classList.add('hidden');
+                waitlistForm.classList.remove('hidden');
+                emailInput.focus();
+            });
+            
+            // Clear error styling when user starts typing again
+            emailInput.addEventListener('input', () => {
+                waitlistError.classList.add('hidden');
+                emailInput.style.borderColor = 'var(--card-border)';
+            });
+
+            // Handle the form submission in the background
+            waitlistForm.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent page reload
+                
+                const emailVal = emailInput.value.trim();
+                
+                // Regex Validation Check
+                if (!emailRegex.test(emailVal)) {
+                    waitlistError.classList.remove('hidden');
+                    emailInput.style.borderColor = '#FF5E5E';
+                    return; // Stop the function here, don't send request
+                }
+                
+                const submitBtn = waitlistForm.querySelector('button[type="submit"]');
+                submitBtn.style.opacity = '0.5';
+                submitBtn.style.pointerEvents = 'none';
+
+                try {
+                    const response = await fetch(waitlistForm.action, {
+                        method: 'POST',
+                        body: new FormData(waitlistForm),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        waitlistForm.classList.add('hidden');
+                        waitlistError.classList.add('hidden');
+                        waitlistSuccess.classList.remove('hidden');
+                    } else {
+                        alert("Oops! There was a problem submitting your email.");
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.pointerEvents = 'auto';
+                    }
+                } catch (error) {
+                    alert("Oops! There was a network error.");
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.pointerEvents = 'auto';
+                }
+            });
         }
     </script>
 
