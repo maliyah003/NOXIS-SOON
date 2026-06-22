@@ -62,7 +62,6 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-
             *,
             *::before,
             *::after {
@@ -84,7 +83,6 @@
         }
 
         @media (max-width: 900px) {
-
             section,
             footer {
                 padding-left: 24px;
@@ -111,14 +109,6 @@
 
         header.scrolled .spacer {
             flex-grow: 0;
-        }
-
-        @media (max-width: 900px) {
-            header {
-                left: 16px;
-                right: 16px;
-                top: 14px;
-            }
         }
 
         .logo {
@@ -157,28 +147,6 @@
 
         header.scrolled #logo-oxis {
             opacity: 0;
-        }
-
-        @media (max-width: 900px) {
-            header .spacer {
-                flex-grow: 0 !important;
-            }
-
-            header .logo {
-                margin-left: 0 !important;
-                margin-right: -34px !important;
-                position: relative;
-                z-index: 10;
-            }
-
-            header .logo-svg {
-                height: 28px !important;
-                width: 18px !important;
-            }
-
-            header #logo-oxis {
-                opacity: 0 !important;
-            }
         }
 
         .header-right {
@@ -271,12 +239,20 @@
             box-shadow: 0 8px 20px rgba(15, 184, 189, 0.4);
         }
 
+        /* ---------- MOBILE HEADER FIX START ---------- */
         @media (max-width: 900px) {
             header {
-                left: 12px !important;
-                right: 12px !important;
-                top: 12px !important;
+                left: 50% !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+                top: 14px !important;
+                width: max-content !important;
                 justify-content: center !important;
+                padding: 6px 8px 6px 16px !important; /* Balanced left/right pad */
+                background: #FFFFFF;
+                border-radius: 999px;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+                gap: 16px !important; /* Uniform gap applied to logo and nav */
             }
 
             header .spacer {
@@ -288,8 +264,7 @@
                 left: auto !important;
                 top: auto !important;
                 transform: none !important;
-                margin-left: 0 !important;
-                margin-right: -28px !important;
+                margin: 0 !important; 
                 z-index: 10 !important;
                 display: flex !important;
                 align-items: center !important;
@@ -297,7 +272,7 @@
 
             header .logo-svg {
                 height: 24px !important;
-                width: 16px !important;
+                width: 15px !important; /* Forces the box to shrink entirely around the "N" to remove empty space */
             }
 
             header #logo-oxis {
@@ -307,11 +282,13 @@
 
             .header-right {
                 width: auto !important;
-                padding: 6px 6px 6px 38px !important;
+                padding: 0 !important; 
+                background: transparent !important;
+                box-shadow: none !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
-                gap: 16px !important;
+                gap: 16px !important; /* Uniform gap */
             }
 
             nav {
@@ -322,9 +299,11 @@
 
             nav ul {
                 display: flex !important;
-                gap: 16px !important;
+                gap: 16px !important; /* Uniform gap for nav links */
                 justify-content: center !important;
                 width: auto !important;
+                margin: 0;
+                padding: 0;
             }
 
             nav a {
@@ -376,24 +355,25 @@
         }
 
         @media (max-width: 360px) {
-            header .logo {
-                margin-right: -24px !important;
+            header {
+                padding: 6px 6px 6px 12px !important;
+                gap: 10px !important; /* Tightens gaps uniformly for extra-small screens */
             }
             .header-right {
-                padding-left: 32px !important;
                 gap: 10px !important;
             }
             nav ul {
                 gap: 10px !important;
             }
             nav a {
-                font-size: 0.6rem !important;
+                font-size: 0.58rem !important;
             }
             .nav-cta {
-                font-size: 0.6rem !important;
+                font-size: 0.58rem !important;
                 padding: 6px 10px !important;
             }
         }
+        /* ---------- MOBILE HEADER FIX END ---------- */
 
         /* ---------- Hero ---------- */
         .hero {
