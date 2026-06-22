@@ -224,50 +224,6 @@
             opacity: 0.6;
         }
 
-        /* Glitch Hover Effect */
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-
-        .glitch-text:hover {
-            opacity: 1 !important;
-        }
-
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            pointer-events: none;
-            opacity: 0;
-            transition: transform 0.1s var(--ease), opacity 0.1s var(--ease);
-        }
-
-        .glitch-text::before {
-            color: #0066FF;
-            z-index: -1;
-        }
-
-        .glitch-text::after {
-            color: var(--brass);
-            z-index: -2;
-        }
-
-        .glitch-text:hover::before {
-            opacity: 0.85;
-            transform: translate(-1.5px, 0.5px);
-        }
-
-        .glitch-text:hover::after {
-            opacity: 0.85;
-            transform: translate(1.5px, -0.5px);
-        }
-
         .nav-badge {
             background: #F0F0F0;
             color: #000000;
@@ -1266,9 +1222,9 @@
         <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="#services" class="glitch-text" data-text="COLLECTIONS">SERVICES</a></li>
-                    <li><a href="#products" class="glitch-text" data-text="PRODUCTS">PRODUCTS</a></li>
-                    <li><a href="#ready" class="glitch-text" data-text="CONTACT">READY</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#products">PRODUCTS</a></li>
+                    <li><a href="#ready">READY</a></li>
                 </ul>
             </nav>
             <a href="mailto:hello@usenoxis.com" class="nav-cta">START <span style="font-size: 0.5rem;">▼</span></a>
@@ -1537,22 +1493,6 @@
     </script>
 
     <script>
-        // Header Nav Glitch Hover Effect
-        document.querySelectorAll('.glitch-text').forEach(el => {
-            let tl;
-            el.addEventListener('mouseenter', () => {
-                if (tl) tl.kill();
-                tl = gsap.timeline({ repeat: 2 });
-                tl.to(el, { x: -3, skewX: 10, duration: 0.05 })
-                    .to(el, { x: 3, skewX: -8, duration: 0.05 })
-                    .to(el, { x: 0, skewX: 0, duration: 0.05 });
-            });
-            el.addEventListener('mouseleave', () => {
-                if (tl) tl.kill();
-                gsap.to(el, { x: 0, skewX: 0, duration: 0.1, overwrite: "auto" });
-            });
-        });
-
         // Trajectory scroll progress
         const trajectory = document.getElementById('trajectory');
         const headerEl = document.querySelector('header');
