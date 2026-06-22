@@ -822,7 +822,7 @@
         /* ---------- Waitlist UI ---------- */
         .waitlist-container {
             margin-top: 16px;
-            height: 44px; /* Fixed height to prevent layout jumps */
+            height: 44px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -914,25 +914,24 @@
             animation: fadeUp 0.4s var(--ease) forwards;
         }
 
-        .waitlist-error {
-            color: #FF5E5E;
+        /* UPDATED ERROR / EXISTS MESSAGES STYLING */
+        .waitlist-error,
+        .waitlist-exists {
             font-size: 0.75rem;
             position: absolute;
-            bottom: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
+            bottom: -28px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            animation: fadeUp 0.3s var(--ease) forwards;
+        }
+
+        .waitlist-error {
+            color: #FF5E5E;
         }
 
         .waitlist-exists {
             color: #FFC85E; 
-            font-size: 0.75rem;
-            position: absolute;
-            bottom: -24px;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            animation: fadeUp 0.3s var(--ease) forwards;
         }
 
         /* ---------- Workflow / trajectory path section ---------- */
@@ -1411,6 +1410,7 @@
                         <p>All you need for your retail business.</p>
                     </div>
                     
+                    <!-- Waitlist UI -->
                     <div class="waitlist-container">
                         <button id="show-waitlist-btn" class="btn-waitlist">Join Waitlist</button>
                         
@@ -1690,10 +1690,10 @@
         // Make sure to wrap each email in quotes and separate them with a comma.
         // =====================================================================
         const preExistingEmails = [
-            "hello.malindu@gmail.com",
+            "admin@usenoxis.com",
             "hello@usenoxis.com",
             "senilkadahanayaka@gmail.com",
-            "malindugimhana8@gmail.com",
+            "hello.malindu@gmail.com",
             // "add_another_email_here@example.com",
         ].map(e => e.toLowerCase()); // Ensures all emails match regardless of caps
 
