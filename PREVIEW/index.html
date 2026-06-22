@@ -441,16 +441,20 @@
             header .logo {
                 margin-right: -24px !important;
             }
+
             .header-right {
                 padding-left: 32px !important;
                 gap: 10px !important;
             }
+
             nav ul {
                 gap: 10px !important;
             }
+
             nav a {
                 font-size: 0.6rem !important;
             }
+
             .nav-cta {
                 font-size: 0.6rem !important;
                 padding: 6px 10px !important;
@@ -811,20 +815,16 @@
         .product-highlight {
             position: relative;
             background: var(--card);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(31, 239, 244, 0.3);
             border-radius: 24px;
             padding: 64px 48px;
             overflow: hidden;
             display: block;
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
             transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
             text-decoration: none;
             color: inherit;
-        }
-
-        .product-highlight:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
-            border-color: rgba(31, 239, 244, 0.3);
         }
 
         .ph-grid {
@@ -846,14 +846,11 @@
         }
 
         .ph-logo {
-            height: 56px;
+            height: 72px;
             width: auto;
             filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-            transition: transform 0.5s var(--ease);
-        }
-
-        .product-highlight:hover .ph-logo {
             transform: scale(1.05);
+            transition: transform 0.5s var(--ease);
         }
 
         .ph-text h3 {
@@ -946,18 +943,13 @@
             width: 100%;
             border-radius: 16px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(31, 239, 244, 0.25);
             padding: 8px;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.8), 0 0 30px rgba(31, 239, 244, 0.15);
             transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
             overflow: hidden;
             display: flex;
-        }
-
-        .product-highlight:hover .ph-screenshot-container {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.8), 0 0 30px rgba(31, 239, 244, 0.15);
-            border-color: rgba(31, 239, 244, 0.25);
         }
 
         .ph-screenshot {
@@ -1395,9 +1387,9 @@
         <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="#services" class="glitch-text" data-text="COLLECTIONS">COLLECTIONS</a></li>
+                    <li><a href="#services" class="glitch-text" data-text="SERVICES">SERVICES</a></li>
                     <li><a href="#products" class="glitch-text" data-text="PRODUCTS">PRODUCTS</a></li>
-                    <li><a href="#ready" class="glitch-text" data-text="CONTACT">CONTACT</a></li>
+                    <li><a href="#ready" class="glitch-text" data-text="READY">READY</a></li>
                 </ul>
             </nav>
             <a href="mailto:hello@usenoxis.com" class="nav-cta">START <span style="font-size: 0.5rem;">▼</span></a>
@@ -1431,7 +1423,7 @@
         <section class="section" id="services">
             <div class="section-head reveal">
                 <div>
-                    <span class="section-label mono">// Services</span>
+                    <span class="section-label mono">Services</span>
                     <h2>Engineered for momentum.</h2>
                 </div>
                 <p>We build robust, high performance software for startups and modern businesses. Clean architecture,
@@ -1474,7 +1466,7 @@
         <section class="section" id="products">
             <div class="section-head reveal">
                 <div>
-                    <span class="section-label mono">// Products</span>
+                    <span class="section-label mono">Products</span>
                     <h2>Software we built and still run.</h2>
                 </div>
                 <p>A few of the products in our own portfolio built on the same process we use for client work.</p>
@@ -1490,26 +1482,48 @@
                         </div>
                         <div class="ph-features">
                             <span class="ph-pill">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
                                 Smart Inventory
                             </span>
                             <span class="ph-pill">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
                                 Modern POS
                             </span>
                             <span class="ph-pill">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 20v-6M6 20V10M18 20V4"></path>
+                                </svg>
                                 Real-time Analytics
                             </span>
                             <span class="ph-pill">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
                                 CRM & Loyalty
                             </span>
                         </div>
                         <div class="ph-actions">
                             <a href="mailto:hello@usenoxis.com?subject=RetailIQ%20Inquiry" class="ph-btn">
                                 Join the Waitlist
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
                                     <path d="M2 8h12M9 3l5 5-5 5" />
                                 </svg>
                             </a>
@@ -1517,7 +1531,8 @@
                     </div>
                     <div class="ph-right">
                         <div class="ph-screenshot-container">
-                            <img src="../assets/RetailiqSS.png" alt="RetailIQ Dashboard Screenshot" class="ph-screenshot">
+                            <img src="../assets/RetailiqSS.png" alt="RetailIQ Dashboard Screenshot"
+                                class="ph-screenshot">
                         </div>
                     </div>
                 </div>
@@ -1526,7 +1541,7 @@
         </section>
 
         <section class="closer" id="ready">
-            <span class="section-label mono reveal">// Ready</span>
+            <span class="section-label mono reveal">Ready</span>
             <h2 class="reveal" id="cta-heading" style="color: rgba(255,255,255,0.3);">Your next build starts with a
                 conversation. Let's have it.</h2>
             <a href="mailto:hello@usenoxis.com" class="btn-primary reveal">
@@ -1540,19 +1555,17 @@
     </main>
 
     <div class="footer-wordmark">
-        <a href="https://www.usenoxis.com" aria-label="Noxis">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24" preserveAspectRatio="xMidYMid meet">
-                <path fill="currentColor"
-                    d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
-                <path fill="currentColor"
-                    d="M875.47,700.1c-76.04,0-138.89-25.07-188.55-75.21-49.67-50.13-74.49-112.86-74.49-188.19s24.83-138.05,74.49-188.19c49.66-50.13,112.39-75.21,188.19-75.21s138.7,25.19,188.73,75.56c50.02,50.38,75.03,112.99,75.03,187.84s-25.07,136.87-75.21,187.48c-50.14,50.61-112.87,75.92-188.19,75.92ZM875.12,602.8c47.05,0,85.66-15.74,115.84-47.23,30.17-31.48,45.27-71.11,45.27-118.87s-15.15-87.68-45.44-119.05-68.73-47.05-115.3-47.05-85.54,15.74-115.48,47.23c-29.94,31.49-44.91,71.11-44.91,118.87s14.97,87.68,44.91,119.04,68.31,47.05,115.12,47.05Z" />
-                <path fill="currentColor"
-                    d="M1193.76,691.91l190.33-287.99h15.33l136.51-222.41h109.78l-175.36,271.95h-13.9l-151.84,238.45h-110.85ZM1546.62,691.91l-155.04-239.87h-9.98l-178.21-270.53h115.84l143.64,222.05h12.48l192.11,288.35h-120.83Z" />
-                <path fill="currentColor" d="M1783.27,691.91V181.51h103.36v510.4h-103.36Z" />
-                <path fill="currentColor"
-                    d="M2220.6,700.1c-34.7,0-64.75-4.46-90.18-13.37-25.43-8.91-46.81-21.62-64.16-38.14-17.35-16.51-34.57-43.78-51.68-81.8l86.97-32.08c11.64,25.19,22.57,42.65,32.79,52.39,10.21,9.75,22.63,17.53,37.25,23.35,14.61,5.83,31.66,8.73,51.15,8.73,26.85,0,48.06-6.11,63.62-18.36,15.56-12.24,23.35-29.28,23.35-51.15s-8.14-37.48-24.42-49.01c-16.28-11.52-47.47-23.82-93.56-36.89-57.74-16.4-97.84-36.77-120.29-61.13-22.45-24.35-33.68-53.76-33.68-88.21,0-41.34,16.33-75.21,49.01-101.58,32.67-26.38,76.1-39.56,130.27-39.56,30.17,0,56.08,3.56,77.7,10.69,21.62,7.13,40.63,18,57.03,32.61s33.02,37.6,49.9,68.97l-83.76,32.43c-11.41-19.96-21.45-33.92-30.12-41.88-8.68-7.96-18.53-13.78-29.58-17.46-11.05-3.68-24.3-5.52-39.74-5.52-24,0-43.54,5.05-58.63,15.15-15.09,10.1-22.63,23.94-22.63,41.52,0,15.45,6.83,28.58,20.49,39.39,13.66,10.81,46.75,23.94,99.26,39.38,56.55,16.4,96.23,37.37,119.05,62.91,22.81,25.55,34.22,57.21,34.22,94.99,0,47.05-17.59,84.42-52.75,112.1-35.17,27.68-80.79,41.52-136.87,41.52Z" />
-            </svg>
-        </a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24" preserveAspectRatio="xMidYMid meet">
+            <path fill="currentColor"
+                d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
+            <path fill="currentColor"
+                d="M875.47,700.1c-76.04,0-138.89-25.07-188.55-75.21-49.67-50.13-74.49-112.86-74.49-188.19s24.83-138.05,74.49-188.19c49.66-50.13,112.39-75.21,188.19-75.21s138.7,25.19,188.73,75.56c50.02,50.38,75.03,112.99,75.03,187.84s-25.07,136.87-75.21,187.48c-50.14,50.61-112.87,75.92-188.19,75.92ZM875.12,602.8c47.05,0,85.66-15.74,115.84-47.23,30.17-31.48,45.27-71.11,45.27-118.87s-15.15-87.68-45.44-119.05-68.73-47.05-115.3-47.05-85.54,15.74-115.48,47.23c-29.94,31.49-44.91,71.11-44.91,118.87s14.97,87.68,44.91,119.04,68.31,47.05,115.12,47.05Z" />
+            <path fill="currentColor"
+                d="M1193.76,691.91l190.33-287.99h15.33l136.51-222.41h109.78l-175.36,271.95h-13.9l-151.84,238.45h-110.85ZM1546.62,691.91l-155.04-239.87h-9.98l-178.21-270.53h115.84l143.64,222.05h12.48l192.11,288.35h-120.83Z" />
+            <path fill="currentColor" d="M1783.27,691.91V181.51h103.36v510.4h-103.36Z" />
+            <path fill="currentColor"
+                d="M2220.6,700.1c-34.7,0-64.75-4.46-90.18-13.37-25.43-8.91-46.81-21.62-64.16-38.14-17.35-16.51-34.57-43.78-51.68-81.8l86.97-32.08c11.64,25.19,22.57,42.65,32.79,52.39,10.21,9.75,22.63,17.53,37.25,23.35,14.61,5.83,31.66,8.73,51.15,8.73,26.85,0,48.06-6.11,63.62-18.36,15.56-12.24,23.35-29.28,23.35-51.15s-8.14-37.48-24.42-49.01c-16.28-11.52-47.47-23.82-93.56-36.89-57.74-16.4-97.84-36.77-120.29-61.13-22.45-24.35-33.68-53.76-33.68-88.21,0-41.34,16.33-75.21,49.01-101.58,32.67-26.38,76.1-39.56,130.27-39.56,30.17,0,56.08,3.56,77.7,10.69,21.62,7.13,40.63,18,57.03,32.61s33.02,37.6,49.9,68.97l-83.76,32.43c-11.41-19.96-21.45-33.92-30.12-41.88-8.68-7.96-18.53-13.78-29.58-17.46-11.05-3.68-24.3-5.52-39.74-5.52-24,0-43.54,5.05-58.63,15.15-15.09,10.1-22.63,23.94-22.63,41.52,0,15.45,6.83,28.58,20.49,39.39,13.66,10.81,46.75,23.94,99.26,39.38,56.55,16.4,96.23,37.37,119.05,62.91,22.81,25.55,34.22,57.21,34.22,94.99,0,47.05-17.59,84.42-52.75,112.1-35.17,27.68-80.79,41.52-136.87,41.52Z" />
+        </svg>
     </div>
 
     <footer>
