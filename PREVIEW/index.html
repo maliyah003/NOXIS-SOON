@@ -8,8 +8,10 @@
     <link rel="icon" type="image/svg+xml" href="../assets/Favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --ink: #000000;
@@ -24,10 +26,75 @@
             --card-border: rgba(255, 255, 255, 0.08);
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
-            
+
             /* Preloader Glitch Colors */
             --glitch-a: #ff2bd6;
             --glitch-b: #00fff2;
+        }
+
+        /* NOXIS Loader Overlay Styles */
+        :root {
+            --noxis-cyan: #1feff4;
+        }
+
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .loader-wrap {
+            width: 90vw;
+            max-width: 220px;
+            height: auto;
+            aspect-ratio: 520 / 800;
+        }
+
+        .loader-wrap svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        #trace {
+            fill: none;
+            stroke: var(--noxis-cyan);
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 2820;
+            stroke-dashoffset: 2820;
+            animation: draw 2.4s ease-in-out infinite;
+        }
+
+        #fill {
+            fill: var(--noxis-cyan);
+            opacity: 0;
+            transform-origin: 1500px 1500px;
+            animation: reveal 2.4s ease-in-out infinite;
+        }
+
+        @keyframes draw {
+            0%   { stroke-dashoffset: 2820; opacity: 1; }
+            55%  { stroke-dashoffset: 0; opacity: 1; }
+            75%  { stroke-dashoffset: 0; opacity: 0; }
+            100% { stroke-dashoffset: 2820; opacity: 0; }
+        }
+
+        @keyframes reveal {
+            0%   { opacity: 0; transform: scale(0.85); }
+            55%  { opacity: 0; transform: scale(0.85); }
+            75%  { opacity: 1; transform: scale(1); }
+            92%  { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.85); }
         }
 
         * {
@@ -45,7 +112,7 @@
             background: var(--ink);
             color: var(--parchment);
             font-family: 'Google Sans', sans-serif;
-            overflow: hidden; 
+            overflow: hidden;
             line-height: 1.5;
         }
 
@@ -54,7 +121,10 @@
             overflow-y: auto;
         }
 
-        h1, h2, h3, .display {
+        h1,
+        h2,
+        h3,
+        .display {
             font-family: 'Google Sans', sans-serif;
             letter-spacing: -0.01em;
         }
@@ -70,79 +140,32 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: 0.001ms !important;
                 transition-duration: 0.001ms !important;
             }
         }
 
-        /* ---------- Preloader Styles ---------- */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--ink);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-canvas {
-            position: relative;
-            width: 90%;
-            max-width: 600px; /* Responsive size */
-            aspect-ratio: 2410.21 / 907.24;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-wrapper {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            will-change: transform;
-        }
-
-        .logo-wrapper svg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-            will-change: transform, opacity;
-        }
-
-        #logoRoot { fill: var(--brass); }
-        #ghostA {
-            fill: var(--glitch-a);
-            opacity: 0;
-            mix-blend-mode: screen;
-            pointer-events: none;
-        }
-        #ghostB {
-            fill: var(--glitch-b);
-            opacity: 0;
-            mix-blend-mode: screen;
-            pointer-events: none;
-        }
 
         /* ---------- Layout shell ---------- */
         .trajectory {
             display: none !important;
         }
 
-        section, footer {
+        section,
+        footer {
             padding-left: 64px;
             padding-right: 64px;
             position: relative;
         }
 
         @media (max-width: 900px) {
-            section, footer {
+
+            section,
+            footer {
                 padding-left: 24px;
                 padding-right: 24px;
             }
@@ -222,17 +245,22 @@
         }
 
         @media (max-width: 900px) {
-            header .spacer { flex-grow: 0 !important; }
+            header .spacer {
+                flex-grow: 0 !important;
+            }
+
             header .logo {
                 margin-left: 0 !important;
                 margin-right: -34px !important;
                 position: relative;
                 z-index: 10;
             }
+
             header .logo-svg {
                 height: 28px !important;
                 width: 18px !important;
             }
+
             header #header-logo-oxis {
                 opacity: 0 !important;
             }
@@ -253,8 +281,17 @@
             padding-left: 64px;
         }
 
-        nav { display: flex; align-items: center; }
-        nav ul { display: flex; gap: 20px; list-style: none; align-items: center; }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            align-items: center;
+        }
 
         nav a {
             font-size: 0.75rem;
@@ -268,24 +305,45 @@
             gap: 6px;
         }
 
-        nav a:hover { opacity: 0.6; }
+        nav a:hover {
+            opacity: 0.6;
+        }
 
         /* Glitch Hover Effect */
-        .glitch-text { position: relative; display: inline-block; }
-        .glitch-text:hover { opacity: 1 !important; }
-        .glitch-text::before, .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent;
-            pointer-events: none;
-            opacity: 0;
-            transition: transform 0.1s var(--ease), opacity 0.1s var(--ease);
+        /* Modern Nav Link Hover Effect */
+        .nav-link {
+            position: relative;
+            color: rgba(0, 0, 0, 0.55);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s var(--ease);
+            display: inline-block;
+            padding: 6px 0;
+            text-decoration: none;
         }
-        .glitch-text::before { color: #0066FF; z-index: -1; }
-        .glitch-text::after { color: var(--brass); z-index: -2; }
-        .glitch-text:hover::before { opacity: 0.85; transform: translate(-1.5px, 0.5px); }
-        .glitch-text:hover::after { opacity: 0.85; transform: translate(1.5px, -0.5px); }
+
+        .nav-link:hover {
+            color: #000000;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 100%;
+            height: 1.8px;
+            background-color: #0FB8BD;
+            transform: translate(-50%, 0) scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .nav-link:hover::after {
+            transform: translate(-50%, 0) scaleX(1);
+        }
 
         .nav-cta {
             font-size: 0.75rem;
@@ -310,34 +368,92 @@
 
         @media (max-width: 900px) {
             header {
-                left: 12px !important; right: 12px !important; top: 12px !important;
+                left: 12px !important;
+                right: 12px !important;
+                top: 12px !important;
                 justify-content: center !important;
             }
-            header .spacer { display: none !important; }
+
+            header .spacer {
+                display: none !important;
+            }
+
             header .logo {
-                position: relative !important; width: 0 !important; height: 24px !important;
-                margin: 0 !important; padding: 0 !important; z-index: 10 !important;
-                display: flex !important; align-items: center !important; overflow: visible !important;
+                position: relative !important;
+                width: 0 !important;
+                height: 24px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                z-index: 10 !important;
+                display: flex !important;
+                align-items: center !important;
+                overflow: visible !important;
             }
+
             header .logo-svg {
-                position: absolute !important; left: 12px !important; height: 24px !important; width: 16px !important;
+                position: absolute !important;
+                left: 12px !important;
+                height: 24px !important;
+                width: 16px !important;
             }
+
             .header-right {
-                width: auto !important; padding: 6px 6px 6px 38px !important;
-                display: flex !important; justify-content: center !important; align-items: center !important; gap: 16px !important;
+                width: auto !important;
+                padding: 6px 6px 6px 38px !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                gap: 16px !important;
             }
-            nav { display: flex !important; flex-grow: 0 !important; justify-content: center !important; }
-            nav ul { display: flex !important; gap: 16px !important; justify-content: center !important; width: auto !important; }
-            nav a { font-size: 0.65rem !important; letter-spacing: 0.02em !important; padding: 4px 0 !important; }
-            .nav-cta { font-size: 0.65rem !important; padding: 8px 14px !important; flex-shrink: 0 !important; }
+
+            nav {
+                display: flex !important;
+                flex-grow: 0 !important;
+                justify-content: center !important;
+            }
+
+            nav ul {
+                display: flex !important;
+                gap: 16px !important;
+                justify-content: center !important;
+                width: auto !important;
+            }
+
+            nav a {
+                font-size: 0.65rem !important;
+                letter-spacing: 0.02em !important;
+                padding: 4px 0 !important;
+            }
+
+            .nav-cta {
+                font-size: 0.65rem !important;
+                padding: 8px 14px !important;
+                flex-shrink: 0 !important;
+            }
         }
 
         @media (max-width: 360px) {
-            header .logo-svg { left: 8px !important; }
-            .header-right { padding-left: 32px !important; gap: 10px !important; }
-            nav ul { gap: 10px !important; }
-            nav a { font-size: 0.6rem !important; }
-            .nav-cta { font-size: 0.6rem !important; padding: 6px 10px !important; }
+            header .logo-svg {
+                left: 8px !important;
+            }
+
+            .header-right {
+                padding-left: 32px !important;
+                gap: 10px !important;
+            }
+
+            nav ul {
+                gap: 10px !important;
+            }
+
+            nav a {
+                font-size: 0.6rem !important;
+            }
+
+            .nav-cta {
+                font-size: 0.6rem !important;
+                padding: 6px 10px !important;
+            }
         }
 
         /* ---------- Hero ---------- */
@@ -362,7 +478,7 @@
             opacity: 0;
             animation: none;
         }
-        
+
         body.loaded .eyebrow {
             animation: fadeUp 0.8s var(--ease) 0.2s forwards;
         }
@@ -391,14 +507,24 @@
             transform: translateY(105%);
             animation: none;
         }
-        
+
         body.loaded .hero h1 .line span {
             animation: revealLine 0.9s var(--ease-draw) forwards;
         }
 
-        body.loaded .hero h1 .line:nth-child(1) span { animation-delay: 0.35s; color: #FFFFFF; }
-        body.loaded .hero h1 .line:nth-child(2) span { animation-delay: 0.48s; color: #FFFFFF; }
-        body.loaded .hero h1 .line:nth-child(3) span { animation-delay: 0.61s; }
+        body.loaded .hero h1 .line:nth-child(1) span {
+            animation-delay: 0.35s;
+            color: #FFFFFF;
+        }
+
+        body.loaded .hero h1 .line:nth-child(2) span {
+            animation-delay: 0.48s;
+            color: #FFFFFF;
+        }
+
+        body.loaded .hero h1 .line:nth-child(3) span {
+            animation-delay: 0.61s;
+        }
 
         .hero h1 .accent {
             color: var(--fletch);
@@ -427,7 +553,7 @@
             opacity: 0;
             animation: none;
         }
-        
+
         body.loaded .hero-sub {
             animation: fadeUp 0.8s var(--ease) 0.85s forwards;
         }
@@ -440,7 +566,7 @@
             opacity: 0;
             animation: none;
         }
-        
+
         body.loaded .hero-actions {
             animation: fadeUp 0.8s var(--ease) 1.0s forwards;
         }
@@ -473,38 +599,23 @@
             transform: translateX(3px);
         }
 
-        .draw-line-wrap {
-            margin-top: 88px;
-            width: 100%;
-            max-width: 720px;
-            opacity: 0;
-            animation: none;
-        }
-        
-        body.loaded .draw-line-wrap {
-            animation: fadeUp 1s var(--ease) 1.2s forwards;
-        }
-
-        .draw-line-wrap svg {
-            width: 100%;
-            height: 40px;
-            display: block;
-        }
-
-        .draw-line-wrap path {
-            stroke: var(--brass);
-            stroke-width: 1.8;
-            fill: none;
-            stroke-dasharray: 1;
-        }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes revealLine {
-            to { transform: translateY(0); }
+            to {
+                transform: translateY(0);
+            }
         }
 
         /* ---------- Reveal-on-scroll generic ---------- */
@@ -513,9 +624,15 @@
             transform: translateY(28px);
             transition: opacity 0.9s var(--ease-draw), transform 0.9s var(--ease-draw);
         }
-        .reveal.in-view { opacity: 1; transform: translateY(0); }
-        
-        .stagger > * { transition-delay: calc(var(--i) * 0.09s); }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger>* {
+            transition-delay: calc(var(--i) * 0.09s);
+        }
 
         /* ---------- Section scaffolding ---------- */
         .section {
@@ -563,7 +680,9 @@
         }
 
         @media (max-width: 900px) {
-            .features { grid-template-columns: 1fr; }
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
 
         .feature {
@@ -694,7 +813,12 @@
             transform: translateY(-1px);
         }
 
-        .ph-actions { margin-top: 12px; }
+        .ph-actions {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
         .ph-btn {
             display: inline-flex;
@@ -712,14 +836,51 @@
             cursor: pointer;
         }
 
-        .ph-btn svg { transition: transform 0.3s var(--ease); }
+        .ph-btn svg {
+            transition: transform 0.3s var(--ease);
+        }
+
         .ph-btn:hover {
             background: transparent;
             color: var(--fletch);
             box-shadow: 0 0 20px rgba(31, 239, 244, 0.3);
             transform: translateY(-2px);
         }
-        .ph-btn:hover svg { transform: translateX(4px); }
+
+        .ph-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        .ph-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--fletch);
+            border: 1px solid rgba(31, 239, 244, 0.35);
+            padding: 12px 24px;
+            border-radius: 99px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s var(--ease);
+            cursor: pointer;
+        }
+
+        .ph-btn-secondary svg {
+            transition: transform 0.3s var(--ease);
+        }
+
+        .ph-btn-secondary:hover {
+            background: rgba(31, 239, 244, 0.05);
+            border-color: var(--fletch);
+            box-shadow: 0 0 15px rgba(31, 239, 244, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .ph-btn-secondary:hover svg {
+            transform: translateX(4px);
+        }
 
         .ph-right {
             display: flex;
@@ -764,28 +925,66 @@
 
         .ph-glow {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px; height: 300px;
+            width: 300px;
+            height: 300px;
             background: radial-gradient(circle, rgba(31, 239, 244, 0.12) 0%, rgba(31, 239, 244, 0) 70%);
-            z-index: 1; opacity: 0.4;
+            z-index: 1;
+            opacity: 0.4;
             transition: opacity 0.5s var(--ease), width 0.5s var(--ease), height 0.5s var(--ease);
             pointer-events: none;
         }
 
         .product-highlight:hover .ph-glow {
-            opacity: 1; width: 600px; height: 600px;
+            opacity: 1;
+            width: 600px;
+            height: 600px;
         }
 
         @media (max-width: 900px) {
-            .product-highlight { padding: 48px 24px !important; border-radius: 20px !important; }
-            .ph-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
-            .ph-left { align-items: center !important; text-align: center !important; }
-            .ph-logo { height: auto !important; max-height: 48px !important; max-width: 85% !important; }
-            .ph-text h3 { font-size: 1.5rem !important; flex-wrap: wrap !important; justify-content: center !important; gap: 10px !important; }
-            .ph-text p { font-size: 0.95rem !important; margin: 0 auto !important; }
-            .ph-features { justify-content: center !important; }
-            .ph-badge { font-size: 0.7rem !important; padding: 3px 10px !important; }
+            .product-highlight {
+                padding: 48px 24px !important;
+                border-radius: 20px !important;
+            }
+
+            .ph-grid {
+                grid-template-columns: 1fr !important;
+                gap: 36px !important;
+            }
+
+            .ph-left {
+                align-items: center !important;
+                text-align: center !important;
+            }
+
+            .ph-logo {
+                height: auto !important;
+                max-height: 48px !important;
+                max-width: 85% !important;
+            }
+
+            .ph-text h3 {
+                font-size: 1.5rem !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 10px !important;
+            }
+
+            .ph-text p {
+                font-size: 0.95rem !important;
+                margin: 0 auto !important;
+            }
+
+            .ph-features {
+                justify-content: center !important;
+            }
+
+            .ph-badge {
+                font-size: 0.7rem !important;
+                padding: 3px 10px !important;
+            }
         }
 
         /* ---------- CTA closer ---------- */
@@ -803,7 +1002,9 @@
             line-height: 1.05;
         }
 
-        .closer .btn-primary { margin-top: 40px; }
+        .closer .btn-primary {
+            margin-top: 40px;
+        }
 
         /* ---------- Footer wordmark ---------- */
         .footer-wordmark {
@@ -817,164 +1018,378 @@
         }
 
         .footer-wordmark a {
-            display: block; width: 100%; cursor: pointer; transition: transform 0.3s var(--ease);
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.3s var(--ease);
         }
-        .footer-wordmark a:hover { transform: scale(1.01); }
-        .footer-wordmark svg { width: 100%; height: auto; display: block; opacity: 1; }
+
+        .footer-wordmark a:hover {
+            transform: scale(1.01);
+        }
+
+        .footer-wordmark svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 1;
+        }
 
         /* ---------- Footer ---------- */
         footer {
             border-top: 1px solid var(--line);
-            padding-top: 56px; padding-bottom: 56px;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 20px;
+            padding-top: 56px;
+            padding-bottom: 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        footer .mono { font-size: 0.78rem; color: var(--parchment-dim); }
-        footer ul { display: flex; gap: 28px; list-style: none; }
-        footer a { font-size: 0.82rem; color: var(--parchment-dim); transition: color 0.3s; }
-        footer a:hover { color: var(--parchment); }
+        footer .mono {
+            font-size: 0.78rem;
+            color: var(--parchment-dim);
+        }
 
-        .social-links { display: flex; gap: 20px; align-items: center; }
+        footer ul {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        footer a {
+            font-size: 0.82rem;
+            color: var(--parchment-dim);
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--parchment);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
         .social-link {
-            color: var(--parchment-dim); transition: color 0.3s, transform 0.3s;
-            display: flex; align-items: center; justify-content: center;
+            color: var(--parchment-dim);
+            transition: color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .social-link svg { width: 20px; height: 20px; }
-        .social-link:hover { color: var(--parchment); transform: translateY(-2px); }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-link:hover {
+            color: var(--parchment);
+            transform: translateY(-2px);
+        }
 
         /* Contact Modal Styles */
         .contact-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1000; display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease);
         }
-        .contact-modal.active { opacity: 1; pointer-events: auto; }
+
+        .contact-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .modal-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
+
         .modal-container {
             position: relative;
             background: linear-gradient(135deg, #15191C 0%, #111111 100%);
             border: 1px solid rgba(31, 239, 244, 0.15);
-            border-radius: 24px; width: 90%; max-width: 520px; padding: 40px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 520px;
+            padding: 40px;
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 40px rgba(31, 239, 244, 0.05);
-            transform: scale(0.9) translateY(20px); transition: transform 0.4s var(--ease-draw);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s var(--ease-draw);
             z-index: 2;
         }
-        .contact-modal.active .modal-container { transform: scale(1) translateY(0); }
+
+        .contact-modal.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
 
         .modal-close-btn {
-            position: absolute; top: 24px; right: 24px; background: transparent; border: none;
-            color: var(--parchment-dim); cursor: pointer; transition: all 0.3s; padding: 4px;
-            display: flex; align-items: center; justify-content: center; border-radius: 50%;
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: transparent;
+            border: none;
+            color: var(--parchment-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
-        .modal-close-btn:hover { color: #FFFFFF; background: rgba(255, 255, 255, 0.05); transform: rotate(90deg); }
 
-        .modal-header { margin-bottom: 28px; }
-        .modal-header h2 { font-size: 1.8rem; font-weight: 700; color: #FFFFFF; margin-bottom: 8px; }
-        .modal-header p { font-size: 0.95rem; color: var(--parchment-dim); line-height: 1.4; }
+        .modal-close-btn:hover {
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(90deg);
+        }
 
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+        .modal-header {
+            margin-bottom: 28px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            font-size: 0.95rem;
+            color: var(--parchment-dim);
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
 
         .modal-label {
-            display: block; font-size: 0.7rem; color: var(--brass); text-transform: uppercase;
-            letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 600;
+            display: block;
+            font-size: 0.7rem;
+            color: var(--brass);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
-        .contact-modal input, .contact-modal select, .contact-modal textarea {
-            width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px; color: #FFFFFF; padding: 12px 16px; font-family: inherit;
-            font-size: 0.9rem; transition: all 0.3s var(--ease); -webkit-appearance: none; -moz-appearance: none; appearance: none;
+
+        .contact-modal input,
+        .contact-modal select,
+        .contact-modal textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #FFFFFF;
+            padding: 12px 16px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s var(--ease);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
-        .select-wrapper { position: relative; }
+
+        .select-wrapper {
+            position: relative;
+        }
+
         .select-wrapper::after {
-            content: '▼'; font-size: 0.6rem; color: var(--brass); position: absolute;
-            right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;
+            content: '▼';
+            font-size: 0.6rem;
+            color: var(--brass);
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
         }
-        .contact-modal input:focus, .contact-modal select:focus, .contact-modal textarea:focus {
-            border-color: var(--brass); box-shadow: 0 0 12px rgba(31, 239, 244, 0.2);
-            outline: none; background: rgba(255, 255, 255, 0.05);
+
+        .contact-modal input:focus,
+        .contact-modal select:focus,
+        .contact-modal textarea:focus {
+            border-color: var(--brass);
+            box-shadow: 0 0 12px rgba(31, 239, 244, 0.2);
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
         }
+
         .btn-submit {
-            width: 100%; background: var(--brass); color: #06282A; border: none; border-radius: 12px;
-            padding: 14px 28px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            transition: all 0.3s var(--ease); margin-top: 12px;
+            width: 100%;
+            background: var(--brass);
+            color: #06282A;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s var(--ease);
+            margin-top: 12px;
         }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(15, 184, 189, 0.35); }
-        .btn-submit svg { transition: transform 0.3s var(--ease); }
-        .btn-submit:hover svg { transform: translateX(4px); }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 184, 189, 0.35);
+        }
+
+        .btn-submit svg {
+            transition: transform 0.3s var(--ease);
+        }
+
+        .btn-submit:hover svg {
+            transform: translateX(4px);
+        }
 
         /* Success State */
         .modal-success-state {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #15191C 0%, #111111 100%); border-radius: 24px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px; text-align: center; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s var(--ease); z-index: 3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #15191C 0%, #111111 100%);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s var(--ease);
+            z-index: 3;
         }
-        .modal-success-state.active { opacity: 1; pointer-events: auto; }
+
+        .modal-success-state.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .success-icon-wrap {
-            width: 64px; height: 64px; background: rgba(31, 239, 244, 0.1); border: 2px solid var(--brass);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--brass);
-            margin-bottom: 24px; box-shadow: 0 0 20px rgba(31, 239, 244, 0.2);
+            width: 64px;
+            height: 64px;
+            background: rgba(31, 239, 244, 0.1);
+            border: 2px solid var(--brass);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brass);
+            margin-bottom: 24px;
+            box-shadow: 0 0 20px rgba(31, 239, 244, 0.2);
         }
-        .success-icon-wrap svg { width: 32px; height: 32px; }
-        .modal-success-state h3 { font-size: 1.8rem; font-weight: 700; color: #FFFFFF; margin-bottom: 12px; }
-        .modal-success-state p { color: var(--parchment-dim); font-size: 0.95rem; line-height: 1.5; margin-bottom: 28px; max-width: 30ch; }
+
+        .success-icon-wrap svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .modal-success-state h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        .modal-success-state p {
+            color: var(--parchment-dim);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 28px;
+            max-width: 30ch;
+        }
+
         .btn-success-close {
-            background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #FFFFFF;
-            padding: 10px 24px; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
-            cursor: pointer; transition: all 0.3s;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 10px 24px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .btn-success-close:hover { border-color: var(--brass); color: var(--brass); box-shadow: 0 0 15px rgba(31, 239, 244, 0.15); }
+
+        .btn-success-close:hover {
+            border-color: var(--brass);
+            color: var(--brass);
+            box-shadow: 0 0 15px rgba(31, 239, 244, 0.15);
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="preloader">
-        <div class="logo-canvas">
-            <svg style="width:0;height:0;position:absolute;">
-                <defs>
-                    <clipPath id="oxisClip" clipPathUnits="userSpaceOnUse">
-                        <rect id="wipeRect" x="350" y="-100" width="0" height="1200" />
-                    </clipPath>
-                </defs>
+    <!-- Loading Screen -->
+    <div id="loader-overlay">
+        <div class="loader-wrap">
+            <svg viewBox="1240 1100 520 800" xmlns="http://www.w3.org/2000/svg">
+                <!-- duplicate path: one for the drawing stroke, one for the solid fill reveal -->
+                <path id="trace" d="M1507.62,1581.44c.43-.57.37-1.07-.19-1.51-22.54-42.68-45.09-85.37-69.29-131.19-10.51,40.72-20,77.5-29.84,115.62h59.89c-4.53,8.1-8.46,15.12-12.39,22.13-6.46,10.52-12.91,21.04-19.37,31.56-4.65,7.58-9.3,15.17-13.95,22.75-.71.19-.97.65-.78,1.36-4.2,6.75-8.4,13.5-12.6,20.24-.6.77-1.2,1.55-1.79,2.32-.65.94-1.3,1.88-1.95,2.82-.46.67-.61,1.41-.44,2.2-5.55,9.01-11.1,18.03-16.65,27.04-4.28,7.03-8.56,14.07-12.84,21.1-22.98,37.14-45.96,74.28-73.14,118.21,23.38-78.23,44.37-148.42,65.73-219.9h-60.94c25.71-99.4,51.12-197.67,76.7-296.55h69.2c37.98,71.84,76.32,144.37,116.35,220.09,10.17-39.19,19.51-75.21,29.21-112.6h-63.16c50.72-87.63,100.45-173.56,152.83-264.05-18.27,73.86-35.25,142.52-52.5,212.25h62.73c-10.24,42.26-20.17,83.25-30.1,124.24-.88,4.87-1.75,9.74-2.63,14.61-1.97,7.99-3.94,15.97-5.92,23.96-.89,3.25-1.79,6.49-2.68,9.74-1.97,8.24-3.94,16.49-5.9,24.73-.23,1.59-.46,3.17-.69,4.76-8.45,33.53-16.9,67.06-25.45,101.01h-61.59c-8.01-12.94-16.09-25.98-24.16-39.02l.46-.49-.41-.53c-6.56-11.54-13.13-23.08-19.69-34.63-1.64-3.19-3.28-6.38-4.92-9.57-2.38-4.24-4.77-8.47-7.15-12.71Z"/>
+                <path id="fill" d="M1507.62,1581.44c.43-.57.37-1.07-.19-1.51-22.54-42.68-45.09-85.37-69.29-131.19-10.51,40.72-20,77.5-29.84,115.62h59.89c-4.53,8.1-8.46,15.12-12.39,22.13-6.46,10.52-12.91,21.04-19.37,31.56-4.65,7.58-9.3,15.17-13.95,22.75-.71.19-.97.65-.78,1.36-4.2,6.75-8.4,13.5-12.6,20.24-.6.77-1.2,1.55-1.79,2.32-.65.94-1.3,1.88-1.95,2.82-.46.67-.61,1.41-.44,2.2-5.55,9.01-11.1,18.03-16.65,27.04-4.28,7.03-8.56,14.07-12.84,21.1-22.98,37.14-45.96,74.28-73.14,118.21,23.38-78.23,44.37-148.42,65.73-219.9h-60.94c25.71-99.4,51.12-197.67,76.7-296.55h69.2c37.98,71.84,76.32,144.37,116.35,220.09,10.17-39.19,19.51-75.21,29.21-112.6h-63.16c50.72-87.63,100.45-173.56,152.83-264.05-18.27,73.86-35.25,142.52-52.5,212.25h62.73c-10.24,42.26-20.17,83.25-30.1,124.24-.88,4.87-1.75,9.74-2.63,14.61-1.97,7.99-3.94,15.97-5.92,23.96-.89,3.25-1.79,6.49-2.68,9.74-1.97,8.24-3.94,16.49-5.9,24.73-.23,1.59-.46,3.17-.69,4.76-8.45,33.53-16.9,67.06-25.45,101.01h-61.59c-8.01-12.94-16.09-25.98-24.16-39.02l.46-.49-.41-.53c-6.56-11.54-13.13-23.08-19.69-34.63-1.64-3.19-3.28-6.38-4.92-9.57-2.38-4.24-4.77-8.47-7.15-12.71Z"/>
             </svg>
-            <div class="logo-wrapper">
-                <svg id="logoRoot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24">
-                    <path id="logo-N" d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
-                    <g clip-path="url(#oxisClip)">
-                        <path d="M875.47,700.1c-76.04,0-138.89-25.07-188.55-75.21-49.67-50.13-74.49-112.86-74.49-188.19s24.83-138.05,74.49-188.19c49.66-50.13,112.39-75.21,188.19-75.21s138.7,25.19,188.73,75.56c50.02,50.38,75.03,112.99,75.03,187.84s-25.07,136.87-75.21,187.48c-50.14,50.61-112.87,75.92-188.19,75.92ZM875.12,602.8c47.05,0,85.66-15.74,115.84-47.23,30.17-31.48,45.27-71.11,45.27-118.87s-15.15-87.68-45.44-119.05-68.73-47.05-115.3-47.05-85.54,15.74-115.48,47.23c-29.94,31.49-44.91,71.11-44.91,118.87s14.97,87.68,44.91,119.04,68.31,47.05,115.12,47.05Z" />
-                        <path d="M1193.76,691.91l190.33-287.99h15.33l136.51-222.41h109.78l-175.36,271.95h-13.9l-151.84,238.45h-110.85ZM1546.62,691.91l-155.04-239.87h-9.98l-178.21-270.53h115.84l143.64,222.05h12.48l192.11,288.35h-120.83Z" />
-                        <path d="M1783.27,691.91V181.51h103.36v510.4h-103.36Z" />
-                        <path d="M2220.6,700.1c-34.7,0-64.75-4.46-90.18-13.37-25.43-8.91-46.81-21.62-64.16-38.14-17.35-16.51-34.57-43.78-51.68-81.8l86.97-32.08c11.64,25.19,22.57,42.65,32.79,52.39,10.21,9.75,22.63,17.53,37.25,23.35,14.61,5.83,31.66,8.73,51.15,8.73,26.85,0,48.06-6.11,63.62-18.36,15.56-12.24,23.35-29.28,23.35-51.15s-8.14-37.48-24.42-49.01c-16.28-11.52-47.47-23.82-93.56-36.89-57.74-16.4-97.84-36.77-120.29-61.13-22.45-24.35-33.68-53.76-33.68-88.21,0-41.34,16.33-75.21,49.01-101.58,32.67-26.38,76.1-39.56,130.27-39.56,30.17,0,56.08,3.56,77.7,10.69,21.62,7.13,40.63,18,57.03,32.61s33.02,37.6,49.9,68.97l-83.76,32.43c-11.41-19.96-21.45-33.92-30.12-41.88-8.68-7.96-18.53-13.78-29.58-17.46-11.05-3.68-24.3-5.52-39.74-5.52-24,0-43.54,5.05-58.63,15.15-15.09,10.1-22.63,23.94-22.63,41.52,0,15.45,6.83,28.58,20.49,39.39,13.66,10.81,46.75,23.94,99.26,39.38,56.55,16.4,96.23,37.37,119.05,62.91,22.81,25.55,34.22,57.21,34.22,94.99,0,47.05-17.59,84.42-52.75,112.1-35.17,27.68-80.79,41.52-136.87,41.52Z" />
-                    </g>
-                </svg>
-                <svg id="ghostA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24">
-                    <path d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
-                </svg>
-                <svg id="ghostB" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24">
-                    <path d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
-                </svg>
-            </div>
         </div>
     </div>
+
     <div class="trajectory" id="trajectory"></div>
 
     <header>
         <a href="https://www.usenoxis.com" class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24" preserveAspectRatio="xMinYMid slice" class="logo-svg">
-                <path class="cls-1" d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2410.21 907.24" preserveAspectRatio="xMinYMid slice"
+                class="logo-svg">
+                <path class="cls-1"
+                    d="M275.79,561.91c.58-.76.49-1.44-.25-2.03-30.28-57.33-60.56-114.66-93.07-176.21-14.12,54.69-26.87,104.1-40.08,155.3h80.45c-6.09,10.88-11.36,20.3-16.64,29.73-8.67,14.13-17.34,28.26-26.01,42.39-6.25,10.18-12.49,20.37-18.74,30.55-.95.26-1.31.87-1.05,1.82-5.64,9.06-11.28,18.13-16.92,27.19-.8,1.04-1.61,2.08-2.41,3.12-.87,1.26-1.74,2.53-2.61,3.79-.62.9-.82,1.89-.6,2.96-7.45,12.11-14.91,24.21-22.36,36.32-5.75,9.45-11.5,18.89-17.25,28.34-30.87,49.89-61.73,99.77-98.24,158.77,31.41-105.07,59.59-199.36,88.29-295.36H6.45c34.53-133.52,68.67-265.5,103.02-398.31h92.95c51.01,96.5,102.51,193.91,156.27,295.62,13.66-52.63,26.21-101.02,39.24-151.24h-84.83C381.21,236.97,448.01,121.54,518.36,0c-24.54,99.21-47.35,191.43-70.51,285.09h84.26c-13.75,56.76-27.09,111.82-40.43,166.88-1.18,6.54-2.36,13.08-3.53,19.62-2.65,10.73-5.3,21.45-7.95,32.18-1.2,4.36-2.4,8.72-3.6,13.08-2.64,11.07-5.29,22.14-7.93,33.22-.31,2.13-.62,4.26-.93,6.39-11.35,45.04-22.69,90.08-34.18,135.67h-82.72c-10.76-17.38-21.61-34.89-32.45-52.41l.62-.66-.55-.72c-8.82-15.5-17.63-31.01-26.45-46.51-2.2-4.28-4.41-8.57-6.61-12.85-3.2-5.69-6.4-11.38-9.6-17.07Z" />
                 <g id="header-logo-oxis">
-                    <path class="cls-1" d="M875.47,700.1c-76.04,0-138.89-25.07-188.55-75.21-49.67-50.13-74.49-112.86-74.49-188.19s24.83-138.05,74.49-188.19c49.66-50.13,112.39-75.21,188.19-75.21s138.7,25.19,188.73,75.56c50.02,50.38,75.03,112.99,75.03,187.84s-25.07,136.87-75.21,187.48c-50.14,50.61-112.87,75.92-188.19,75.92ZM875.12,602.8c47.05,0,85.66-15.74,115.84-47.23,30.17-31.48,45.27-71.11,45.27-118.87s-15.15-87.68-45.44-119.05-68.73-47.05-115.3-47.05-85.54,15.74-115.48,47.23c-29.94,31.49-44.91,71.11-44.91,118.87s14.97,87.68,44.91,119.04,68.31,47.05,115.12,47.05Z" />
-                    <path class="cls-1" d="M1193.76,691.91l190.33-287.99h15.33l136.51-222.41h109.78l-175.36,271.95h-13.9l-151.84,238.45h-110.85ZM1546.62,691.91l-155.04-239.87h-9.98l-178.21-270.53h115.84l143.64,222.05h12.48l192.11,288.35h-120.83Z" />
+                    <path class="cls-1"
+                        d="M875.47,700.1c-76.04,0-138.89-25.07-188.55-75.21-49.67-50.13-74.49-112.86-74.49-188.19s24.83-138.05,74.49-188.19c49.66-50.13,112.39-75.21,188.19-75.21s138.7,25.19,188.73,75.56c50.02,50.38,75.03,112.99,75.03,187.84s-25.07,136.87-75.21,187.48c-50.14,50.61-112.87,75.92-188.19,75.92ZM875.12,602.8c47.05,0,85.66-15.74,115.84-47.23,30.17-31.48,45.27-71.11,45.27-118.87s-15.15-87.68-45.44-119.05-68.73-47.05-115.3-47.05-85.54,15.74-115.48,47.23c-29.94,31.49-44.91,71.11-44.91,118.87s14.97,87.68,44.91,119.04,68.31,47.05,115.12,47.05Z" />
+                    <path class="cls-1"
+                        d="M1193.76,691.91l190.33-287.99h15.33l136.51-222.41h109.78l-175.36,271.95h-13.9l-151.84,238.45h-110.85ZM1546.62,691.91l-155.04-239.87h-9.98l-178.21-270.53h115.84l143.64,222.05h12.48l192.11,288.35h-120.83Z" />
                     <path class="cls-1" d="M1783.27,691.91V181.51h103.36v510.4h-103.36Z" />
-                    <path class="cls-1" d="M2220.6,700.1c-34.7,0-64.75-4.46-90.18-13.37-25.43-8.91-46.81-21.62-64.16-38.14-17.35-16.51-34.57-43.78-51.68-81.8l86.97-32.08c11.64,25.19,22.57,42.65,32.79,52.39,10.21,9.75,22.63,17.53,37.25,23.35,14.61,5.83,31.66,8.73,51.15,8.73,26.85,0,48.06-6.11,63.62-18.36,15.56-12.24,23.35-29.28,23.35-51.15s-8.14-37.48-24.42-49.01c-16.28-11.52-47.47-23.82-93.56-36.89-57.74-16.4-97.84-36.77-120.29-61.13-22.45-24.35-33.68-53.76-33.68-88.21,0-41.34,16.33-75.21,49.01-101.58,32.67-26.38,76.1-39.56,130.27-39.56,30.17,0,56.08,3.56,77.7,10.69,21.62,7.13,40.63,18,57.03,32.61s33.02,37.6,49.9,68.97l-83.76,32.43c-11.41-19.96-21.45-33.92-30.12-41.88-8.68-7.96-18.53-13.78-29.58-17.46-11.05-3.68-24.3-5.52-39.74-5.52-24,0-43.54,5.05-58.63,15.15-15.09,10.1-22.63,23.94-22.63,41.52,0,15.45,6.83,28.58,20.49,39.39,13.66,10.81,46.75,23.94,99.26,39.38,56.55,16.4,96.23,37.37,119.05,62.91,22.81,25.55,34.22,57.21,34.22,94.99,0,47.05-17.59,84.42-52.75,112.1-35.17,27.68-80.79,41.52-136.87,41.52Z" />
+                    <path class="cls-1"
+                        d="M2220.6,700.1c-34.7,0-64.75-4.46-90.18-13.37-25.43-8.91-46.81-21.62-64.16-38.14-17.35-16.51-34.57-43.78-51.68-81.8l86.97-32.08c11.64,25.19,22.57,42.65,32.79,52.39,10.21,9.75,22.63,17.53,37.25,23.35,14.61,5.83,31.66,8.73,51.15,8.73,26.85,0,48.06-6.11,63.62-18.36,15.56-12.24,23.35-29.28,23.35-51.15s-8.14-37.48-24.42-49.01c-16.28-11.52-47.47-23.82-93.56-36.89-57.74-16.4-97.84-36.77-120.29-61.13-22.45-24.35-33.68-53.76-33.68-88.21,0-41.34,16.33-75.21,49.01-101.58,32.67-26.38,76.1-39.56,130.27-39.56,30.17,0,56.08,3.56,77.7,10.69,21.62,7.13,40.63,18,57.03,32.61s33.02,37.6,49.9,68.97l-83.76,32.43c-11.41-19.96-21.45-33.92-30.12-41.88-8.68-7.96-18.53-13.78-29.58-17.46-11.05-3.68-24.3-5.52-39.74-5.52-24,0-43.54,5.05-58.63,15.15-15.09,10.1-22.63,23.94-22.63,41.52,0,15.45,6.83,28.58,20.49,39.39,13.66,10.81,46.75,23.94,99.26,39.38,56.55,16.4,96.23,37.37,119.05,62.91,22.81,25.55,34.22,57.21,34.22,94.99,0,47.05-17.59,84.42-52.75,112.1-35.17,27.68-80.79,41.52-136.87,41.52Z" />
                 </g>
             </svg>
         </a>
@@ -982,9 +1397,9 @@
         <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="#services" class="glitch-text" data-text="SERVICES">SERVICES</a></li>
-                    <li><a href="#products" class="glitch-text" data-text="PRODUCTS">PRODUCTS</a></li>
-                    <li><a href="#ready" class="glitch-text" data-text="READY">READY</a></li>
+                    <li><a href="#services" class="nav-link">SERVICES</a></li>
+                    <li><a href="#products" class="nav-link">PRODUCTS</a></li>
+                    <li><a href="#ready" class="nav-link">READY</a></li>
                 </ul>
             </nav>
             <a href="mailto:hello@usenoxis.com" class="nav-cta">START <span style="font-size: 0.5rem;">▼</span></a>
@@ -993,7 +1408,7 @@
 
     <main>
         <section class="hero" id="hero">
-            <span class="eyebrow mono">Precision software engineering</span>
+            <span class="eyebrow mono">Engineering Better Business</span>
             <h1>
                 <span class="line"><span>Stop guessing.</span></span>
                 <span class="line"><span>Start <span class="flap-word" id="flapWord">building.</span></span></span>
@@ -1011,12 +1426,8 @@
                     </svg>
                 </a>
             </div>
-            
-            <div class="draw-line-wrap">
-                <svg viewBox="0 0 720 40">
-                    <path id="drawPath" d="M0,20 Q360,20 720,20" />
-                </svg>
-            </div>
+
+
         </section>
 
         <section class="section" id="services">
@@ -1076,14 +1487,16 @@
                     <div class="ph-left">
                         <img src="../assets/LOGORETAILArtboard%201.png" alt="RetailIQ Logo" class="ph-logo">
                         <div class="ph-text">
-                            <h3>RetailIQ <span class="ph-badge">Coming Soon</span></h3>
+                            <h3>RetailIQ <span class="ph-badge">Live Demo</span></h3>
                             <p>All you need for your retail business.</p>
                         </div>
                         <div class="ph-features">
                             <span class="ph-pill">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
                                     <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                                     <line x1="12" y1="22.08" x2="12" y2="12"></line>
                                 </svg>
@@ -1117,9 +1530,17 @@
                             </span>
                         </div>
                         <div class="ph-actions">
-                            <a href="mailto:hello@usenoxis.com?subject=RetailIQ%20Inquiry" class="ph-btn">
+                            <a href="https://retailiq.usenoxis.com" target="_blank" rel="noopener noreferrer" class="ph-btn">
+                                Try Live Demo
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M2 8h12M9 3l5 5-5 5" />
+                                </svg>
+                            </a>
+                            <a href="mailto:hello@usenoxis.com?subject=RetailIQ%20Inquiry" class="ph-btn-secondary">
                                 Join the Waitlist
-                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
                                     <path d="M2 8h12M9 3l5 5-5 5" />
                                 </svg>
                             </a>
@@ -1217,7 +1638,8 @@
         <div class="modal-overlay" id="modalOverlay"></div>
         <div class="modal-container">
             <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close form">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -1251,7 +1673,8 @@
                 </div>
                 <div class="form-group">
                     <label for="form-message" class="modal-label">Project Details</label>
-                    <textarea name="message" id="form-message" rows="4" placeholder="Describe what you want to build, timeline, budget..." required></textarea>
+                    <textarea name="message" id="form-message" rows="4"
+                        placeholder="Describe what you want to build, timeline, budget..." required></textarea>
                 </div>
                 <button type="submit" class="btn-submit" id="submitBtn">
                     <span>Send Message</span>
@@ -1262,7 +1685,8 @@
             </form>
             <div class="modal-success-state" id="modalSuccessState">
                 <div class="success-icon-wrap">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                 </div>
@@ -1275,89 +1699,32 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    
+
     <script>
-        const svgs = ['logoRoot', 'ghostA', 'ghostB'].map(id => document.getElementById(id));
-        const root = svgs[0];
-        const ghostA = svgs[1];
-        const ghostB = svgs[2];
-        const wrapper = document.querySelector('.logo-wrapper');
-
-        // Initial setup for the scaling effect:
-        // We use xPercent: 39.12 to perfectly center the isolated 'N' inside the container
-        // and scale: 1.6 to ensure it's nice and large on mobile.
-        gsap.set(wrapper, { xPercent: 39.12, scale: 1.6 });
-        gsap.set([root, ghostA, ghostB], { opacity: 0, x: 0, skewX: 0 });
-
-        // Glitch offsets reduced slightly to prevent elements flying off-screen due to the new scale
-        const GLITCH_STEPS = [
-            { rx: -6, bx: 6, skew: 3, op: 0.25 },
-            { rx: 8, bx: -8, skew: -4, op: 0.9 },
-            { rx: -4, bx: 5, skew: 2, op: 0.15 },
-            { rx: 5, bx: -4, skew: -2, op: 1 },
-            { rx: -2, bx: 3, skew: 1, op: 0.5 },
-            { rx: 0, bx: 0, skew: 0, op: 1 }
-        ];
-
-        function glitchIn(tl) {
-            GLITCH_STEPS.forEach(step => {
-                tl.to(root, { opacity: step.op, skewX: step.skew, duration: 0.045, ease: 'none' });
-                tl.to(ghostA, { x: step.rx, opacity: step.op * 0.7, duration: 0.045, ease: 'none' }, '<');
-                tl.to(ghostB, { x: step.bx, opacity: step.op * 0.7, duration: 0.045, ease: 'none' }, '<');
-            });
-            tl.set(root, { opacity: 1, skewX: 0 });
-            tl.set([ghostA, ghostB], { opacity: 0, x: 0 });
-        }
-
-        function glitchOut(tl) {
-            GLITCH_STEPS.forEach(step => {
-                tl.to(root, { skewX: step.skew, duration: 0.045, ease: 'none' });
-                tl.to(ghostA, { x: step.rx, opacity: step.op * 0.7, duration: 0.045, ease: 'none' }, '<');
-                tl.to(ghostB, { x: step.bx, opacity: step.op * 0.7, duration: 0.045, ease: 'none' }, '<');
-            });
-            tl.to([root, ghostA, ghostB], { opacity: 0, duration: 0.25, ease: 'power1.in' });
-            tl.set([ghostA, ghostB], { opacity: 0, x: 0 });
-            tl.set(root, { skewX: 0 });
-        }
-
         function initPreloader() {
-            // Play exactly once, then reveal site
-            const tl = gsap.timeline({ 
-                defaults: { ease: 'power3.inOut' },
-                onComplete: () => {
-                    gsap.to('#preloader', {
-                        opacity: 0,
-                        duration: 0.6,
-                        ease: 'power2.out',
-                        onComplete: () => {
-                            document.getElementById('preloader').style.display = 'none';
-                            
-                            // Restore main site scrolling & trigger entrance animations
-                            document.body.style.overflow = '';
-                            document.body.classList.add('loaded');
-                            window.scrollTo(0, 0);
-                            
-                            initWordRotator();
-                        }
-                    });
-                }
-            });
+            // Lock body scroll initially for the preloader
+            document.body.style.overflow = 'hidden';
 
-            glitchIn(tl);
-            tl.to({}, { duration: 0.9 });
-            
-            // OXIS wipe reveal with CSS Transform shift
-            tl.to(wrapper, { xPercent: 0, scale: 1, duration: 1.0, ease: 'power3.out' }, 'reveal');
-            tl.to('#wipeRect', { attr: { width: 2200 }, duration: 1.0, ease: 'power3.out' }, 'reveal');
-            
-            tl.to({}, { duration: 1.3 });
-            
-            // OXIS wipe reverse
-            tl.to(wrapper, { xPercent: 39.12, scale: 1.6, duration: 0.8, ease: 'power3.inOut' }, 'retract');
-            tl.to('#wipeRect', { attr: { width: 0 }, duration: 0.8, ease: 'power3.inOut' }, 'retract');
-            
-            tl.to({}, { duration: 0.5 });
-            glitchOut(tl);
+            // Wait exactly 2 seconds (2000ms) before starting the fade-out
+            setTimeout(() => {
+                const loader = document.getElementById('loader-overlay');
+                if (loader) {
+                    loader.style.opacity = '0';
+                }
+
+                // Unlock main site scrolling & trigger entrance animations
+                document.body.style.overflow = '';
+                document.body.classList.add('loaded');
+                window.scrollTo(0, 0);
+
+                setTimeout(() => {
+                    if (loader) {
+                        loader.style.display = 'none';
+                    }
+                }, 600); // Match CSS transition duration
+
+                initWordRotator();
+            }, 2000);
         }
 
         initPreloader();
@@ -1455,22 +1822,6 @@
     </script>
 
     <script>
-        // Header Nav Glitch Hover Effect
-        document.querySelectorAll('.glitch-text').forEach(el => {
-            let tl;
-            el.addEventListener('mouseenter', () => {
-                if (tl) tl.kill();
-                tl = gsap.timeline({ repeat: 2 });
-                tl.to(el, { x: -3, skewX: 10, duration: 0.05 })
-                    .to(el, { x: 3, skewX: -8, duration: 0.05 })
-                    .to(el, { x: 0, skewX: 0, duration: 0.05 });
-            });
-            el.addEventListener('mouseleave', () => {
-                if (tl) tl.kill();
-                gsap.to(el, { x: 0, skewX: 0, duration: 0.1, overwrite: "auto" });
-            });
-        });
-
         // Trajectory scroll progress
         const trajectory = document.getElementById('trajectory');
         const headerEl = document.querySelector('header');
@@ -1500,42 +1851,7 @@
         }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
         revealEls.forEach(el => io.observe(el));
 
-        // Draw-line: tension curve that responds to mouse, releases on scroll past hero
-        const drawPath = document.getElementById('drawPath');
-        const heroEl = document.getElementById('hero');
-        let mouseX = 0.5;
-        let released = false;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX / window.innerWidth;
-        });
-
-        function animateDraw() {
-            if (!released) {
-                const sway = Math.sin(Date.now() / 1400) * 4;
-                const pull = (mouseX - 0.5) * 10;
-                const midY = 20 + sway + pull * 0.3;
-                drawPath.setAttribute('d', `M0,20 Q360,${midY} 720,20`);
-            }
-            requestAnimationFrame(animateDraw);
-        }
-        animateDraw();
-
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting && entry.boundingClientRect.top < 0 && !released) {
-                    released = true;
-                    drawPath.style.transition = 'd 0.5s var(--ease-draw)';
-                    drawPath.setAttribute('d', 'M0,20 Q360,20 720,20');
-                    drawPath.style.stroke = '#0FB8BD';
-                    setTimeout(() => { drawPath.style.stroke = '#0FB8BD'; }, 600);
-                } else if (entry.isIntersecting) {
-                    released = false;
-                    drawPath.style.transition = '';
-                }
-            });
-        }, { threshold: 0 });
-        heroObserver.observe(heroEl);
     </script>
 
     <script>
@@ -1579,18 +1895,18 @@
             document.querySelectorAll('a[href^="mailto:hello@usenoxis.com"]').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
+
                     const href = link.getAttribute('href');
                     const query = href.split('?')[1];
                     const urlParams = new URLSearchParams(query || '');
                     const subject = urlParams.get('subject');
-                    
+
                     const modalTitle = document.getElementById('modalTitle');
                     const modalDesc = document.getElementById('modalDesc');
                     const submitBtnText = submitBtn ? submitBtn.querySelector('span') : null;
                     const projectDetailsLabel = document.querySelector('label[for="form-message"]');
                     const projectDetailsTextarea = document.getElementById('form-message');
-                    
+
                     if (serviceSelect) {
                         if (subject && subject.toLowerCase().includes('retail')) {
                             serviceSelect.value = 'waitlist';
@@ -1614,22 +1930,22 @@
                             }
                         }
                     }
-                    
+
                     openModal();
                 });
             });
 
             if (form) {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     e.preventDefault();
-                    
+
                     const submitBtnText = submitBtn.querySelector('span');
                     const originalText = submitBtnText ? submitBtnText.textContent : 'Send Message';
                     if (submitBtnText) submitBtnText.textContent = 'Sending...';
                     submitBtn.disabled = true;
-                    
+
                     const formData = new FormData(form);
-                    
+
                     fetch(form.action, {
                         method: form.method,
                         body: formData,
@@ -1637,39 +1953,40 @@
                             'Accept': 'application/json'
                         }
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            const successTitle = successState.querySelector('h3');
-                            const successText = successState.querySelector('p');
-                            if (serviceSelect && serviceSelect.value === 'waitlist') {
-                                if (successTitle) successTitle.textContent = 'You are on the list!';
-                                if (successText) successText.textContent = "Thank you for joining the RetailIQ waitlist. We will notify you as soon as early access is available.";
-                            } else {
-                                if (successTitle) successTitle.textContent = 'Message Sent!';
-                                if (successText) successText.textContent = "Thank you for reaching out. We've received your request and will be in touch shortly.";
-                            }
-                            successState.classList.add('active');
-                        } else {
-                            response.json().then(data => {
-                                if (data && data.errors) {
-                                    alert(data.errors.map(err => err.message).join(", "));
+                        .then(response => {
+                            if (response.ok) {
+                                const successTitle = successState.querySelector('h3');
+                                const successText = successState.querySelector('p');
+                                if (serviceSelect && serviceSelect.value === 'waitlist') {
+                                    if (successTitle) successTitle.textContent = 'You are on the list!';
+                                    if (successText) successText.textContent = "Thank you for joining the RetailIQ waitlist. We will notify you as soon as early access is available.";
                                 } else {
-                                    alert("Oops! There was a problem submitting your form");
+                                    if (successTitle) successTitle.textContent = 'Message Sent!';
+                                    if (successText) successText.textContent = "Thank you for reaching out. We've received your request and will be in touch shortly.";
                                 }
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        alert("Oops! There was a problem submitting your form. Please check your internet connection and try again.");
-                    })
-                    .finally(() => {
-                        if (submitBtnText) submitBtnText.textContent = originalText;
-                        submitBtn.disabled = false;
-                    });
+                                successState.classList.add('active');
+                            } else {
+                                response.json().then(data => {
+                                    if (data && data.errors) {
+                                        alert(data.errors.map(err => err.message).join(", "));
+                                    } else {
+                                        alert("Oops! There was a problem submitting your form");
+                                    }
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            alert("Oops! There was a problem submitting your form. Please check your internet connection and try again.");
+                        })
+                        .finally(() => {
+                            if (submitBtnText) submitBtnText.textContent = originalText;
+                            submitBtn.disabled = false;
+                        });
                 });
             }
         })();
     </script>
 
 </body>
+
 </html>
