@@ -548,7 +548,7 @@
             margin-top: 28px;
             max-width: 46ch;
             font-size: 1.125rem;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.6);
             opacity: 0;
             animation: none;
         }
@@ -703,10 +703,9 @@
             align-items: flex-start;
             justify-content: space-between;
             height: auto;
-            transition: transform 0.4s var(--ease-draw);
         }
 
-        /* Left vertical accent line that expands on hover */
+        /* Left vertical accent line */
         .feature::before {
             content: '';
             position: absolute;
@@ -715,15 +714,10 @@
             width: 1.5px;
             height: 32px;
             background: rgba(31, 239, 244, 0.25);
-            transition: height 0.4s var(--ease-draw), background-color 0.4s var(--ease);
-        }
-
-        .feature:hover {
-            transform: translateY(-6px);
+            transition: background-color 0.4s var(--ease);
         }
 
         .feature:hover::before {
-            height: 100%;
             background: var(--fletch);
         }
 
@@ -738,12 +732,11 @@
             font-family: 'Google Sans', sans-serif;
             line-height: 1;
             pointer-events: none;
-            transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+            transition: opacity 0.4s var(--ease);
         }
 
         .feature:hover .feature-number {
             opacity: 0.12;
-            transform: scale(1.05);
         }
 
         .feature-content {
@@ -756,11 +749,10 @@
             height: 34px;
             margin-bottom: 28px;
             color: rgba(255, 255, 255, 0.7);
-            transition: transform 0.4s var(--ease), color 0.4s var(--ease);
+            transition: color 0.4s var(--ease);
         }
 
         .feature:hover .feature-icon {
-            transform: scale(1.08) rotate(8deg);
             color: var(--fletch);
         }
 
