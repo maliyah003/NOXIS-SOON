@@ -358,11 +358,10 @@
             gap: 6px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: all 0.35s var(--ease);
+            transition: color 0.35s var(--ease), background-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
         }
 
         .nav-cta:hover {
-            transform: translateY(-1px);
             box-shadow: 0 8px 20px rgba(15, 184, 189, 0.4);
         }
 
@@ -571,6 +570,15 @@
             animation: fadeUp 0.8s var(--ease) 1.0s forwards;
         }
 
+        .magnetic-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 10px;
+            margin: -10px;
+        }
+
         .btn-primary {
             background: var(--brass);
             color: #06282A;
@@ -581,13 +589,12 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: transform 0.4s var(--ease-draw), background 0.3s, box-shadow 0.4s var(--ease-draw);
+            transition: background 0.3s, box-shadow 0.4s var(--ease-draw);
             position: relative;
             overflow: hidden;
         }
 
         .btn-primary:hover {
-            transform: translateX(4px);
             box-shadow: 0 8px 24px rgba(15, 184, 189, 0.35);
         }
 
@@ -897,7 +904,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s var(--ease);
+            transition: color 0.3s var(--ease), background-color 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
             cursor: pointer;
         }
 
@@ -909,7 +916,6 @@
             background: transparent;
             color: var(--fletch);
             box-shadow: 0 0 20px rgba(31, 239, 244, 0.3);
-            transform: translateY(-2px);
         }
 
         .ph-btn:hover svg {
@@ -928,7 +934,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s var(--ease);
+            transition: color 0.3s var(--ease), background-color 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
             cursor: pointer;
         }
 
@@ -940,7 +946,6 @@
             background: rgba(31, 239, 244, 0.05);
             border-color: var(--fletch);
             box-shadow: 0 0 15px rgba(31, 239, 244, 0.15);
-            transform: translateY(-2px);
         }
 
         .ph-btn-secondary:hover svg {
@@ -1158,7 +1163,7 @@
 
         .social-link {
             color: var(--parchment-dim);
-            transition: color 0.3s, transform 0.3s;
+            transition: color 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1171,7 +1176,6 @@
 
         .social-link:hover {
             color: var(--parchment);
-            transform: translateY(-2px);
         }
 
         /* Contact Modal Styles */
@@ -1355,12 +1359,11 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.3s var(--ease);
+            transition: color 0.3s var(--ease), background-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
             margin-top: 12px;
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(15, 184, 189, 0.35);
         }
 
@@ -1947,6 +1950,66 @@
         }
         window.addEventListener('scroll', updateProgress, { passive: true });
         updateProgress();
+
+        // ── Magnetic Buttons Interactive Logic ─────────────────────────────────
+        (function () {
+            const buttonsToMagnetize = document.querySelectorAll('.nav-cta, .btn-primary, .ph-btn, .ph-btn-secondary, .btn-submit, .btn-success-close, .social-link');
+            
+            buttonsToMagnetize.forEach((btn) => {
+                if (btn.parentElement.classList.contains('magnetic-wrap')) return;
+
+                const wrap = document.createElement('div');
+                wrap.className = 'magnetic-wrap';
+                
+                if (btn.classList.contains('reveal')) {
+                    wrap.classList.add('reveal');
+                    btn.classList.remove('reveal');
+                }
+
+                const computedStyle = window.getComputedStyle(btn);
+                const display = computedStyle.display;
+                wrap.style.display = (display === 'block' || display === 'flex') ? 'flex' : 'inline-flex';
+                
+                const marginTop = computedStyle.marginTop;
+                const marginBottom = computedStyle.marginBottom;
+                const marginLeft = computedStyle.marginLeft;
+                const marginRight = computedStyle.marginRight;
+                
+                if (marginTop && marginTop !== '0px') { wrap.style.marginTop = marginTop; btn.style.marginTop = '0px'; }
+                if (marginBottom && marginBottom !== '0px') { wrap.style.marginBottom = marginBottom; btn.style.marginBottom = '0px'; }
+                if (marginLeft && marginLeft !== '0px') { wrap.style.marginLeft = marginLeft; btn.style.marginLeft = '0px'; }
+                if (marginRight && marginRight !== '0px') { wrap.style.marginRight = marginRight; btn.style.marginRight = '0px'; }
+
+                btn.parentNode.insertBefore(wrap, btn);
+                wrap.appendChild(btn);
+
+                const strength = 0.35;
+
+                wrap.addEventListener("mousemove", (e) => {
+                    const rect = wrap.getBoundingClientRect();
+                    const x = gsap.utils.mapRange(rect.left, rect.right, -rect.width / 2, rect.width / 2, e.clientX);
+                    const y = gsap.utils.mapRange(rect.top, rect.bottom, -rect.height / 2, rect.height / 2, e.clientY);
+
+                    gsap.to(btn, {
+                        x: x * strength,
+                        y: y * strength,
+                        duration: 0.4,
+                        ease: "power2.out",
+                        overwrite: true
+                    });
+                });
+
+                wrap.addEventListener("mouseleave", () => {
+                    gsap.to(btn, { 
+                        x: 0, 
+                        y: 0,
+                        duration: 0.7,
+                        ease: "elastic.out(1, 0.4)",
+                        overwrite: true
+                    });
+                });
+            });
+        })();
 
         // Scroll-triggered reveals
         const revealEls = document.querySelectorAll('.reveal, .reveal-tension, .node');
