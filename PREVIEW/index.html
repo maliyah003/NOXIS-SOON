@@ -675,69 +675,135 @@
         .features {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 48px;
+            align-items: stretch;
         }
 
         @media (max-width: 900px) {
             .features {
                 grid-template-columns: 1fr;
+                gap: 48px;
             }
         }
 
         .feature {
-            background: var(--card);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 44px 36px;
-            transition: transform 0.4s var(--ease-draw), box-shadow 0.4s var(--ease);
+            background: transparent;
+            border: none;
+            padding: 8px 0px 8px 28px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            height: auto;
+            transition: transform 0.4s var(--ease-draw);
+        }
+
+        /* Left vertical accent line that expands on hover */
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 32px;
+            background: rgba(31, 239, 244, 0.25);
+            transition: height 0.4s var(--ease-draw), background-color 0.4s var(--ease);
         }
 
         .feature:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 32px rgba(21, 25, 28, 0.08);
+            transform: translateY(-6px);
+        }
+
+        .feature:hover::before {
+            height: 100%;
+            background: var(--fletch);
+        }
+
+        .feature-number {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--fletch);
+            opacity: 0.03;
+            font-family: 'Google Sans', sans-serif;
+            line-height: 1;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+        }
+
+        .feature:hover .feature-number {
+            opacity: 0.12;
+            transform: scale(1.05);
+        }
+
+        .feature-content {
+            width: 100%;
+            margin-bottom: 24px;
         }
 
         .feature-icon {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             margin-bottom: 28px;
-            color: var(--brass);
+            color: rgba(255, 255, 255, 0.7);
+            transition: transform 0.4s var(--ease), color 0.4s var(--ease);
+        }
+
+        .feature:hover .feature-icon {
+            transform: scale(1.08) rotate(8deg);
+            color: var(--fletch);
         }
 
         .feature h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
+            font-size: 1.35rem;
+            font-weight: 700;
             margin-bottom: 12px;
             color: var(--parchment);
+            transition: color 0.4s var(--ease);
+            letter-spacing: -0.01em;
+        }
+
+        .feature:hover h3 {
+            color: var(--fletch);
         }
 
         .feature p {
-            font-size: 0.95rem;
+            font-size: 0.98rem;
+            line-height: 1.65;
             color: var(--parchment-dim);
         }
 
         .feature-tag {
-            margin-top: 20px;
-            font-size: 0.7rem;
-            color: #06282A;
-            background: var(--brass);
+            font-size: 0.72rem;
+            color: var(--fletch);
+            border: 1px solid rgba(31, 239, 244, 0.2);
+            background: rgba(31, 239, 244, 0.03);
             display: inline-block;
-            padding: 4px 11px;
-            border-radius: 999px;
+            padding: 5px 12px;
+            border-radius: 99px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: all 0.4s var(--ease);
+        }
+
+        .feature:hover .feature-tag {
+            background: var(--fletch);
+            color: #06282A;
+            border-color: var(--fletch);
+            box-shadow: 0 0 10px rgba(31, 239, 244, 0.25);
         }
 
         .product-highlight {
             position: relative;
-            background: var(--card);
-            border: 1px solid rgba(31, 239, 244, 0.3);
-            border-radius: 24px;
-            padding: 64px 48px;
-            overflow: hidden;
+            background: transparent;
+            border: none;
+            padding: 64px 0px;
+            overflow: visible;
             display: block;
-            transform: translateY(-4px);
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
             text-decoration: none;
             color: inherit;
         }
@@ -948,18 +1014,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
+            width: 1000px;
             height: 600px;
-            background: radial-gradient(circle, rgba(31, 239, 244, 0.12) 0%, rgba(31, 239, 244, 0) 70%);
+            background: radial-gradient(circle, rgba(31, 239, 244, 0.12) 0%, rgba(31, 239, 244, 0.04) 40%, rgba(31, 239, 244, 0) 75%);
             z-index: 1;
             opacity: 1;
             pointer-events: none;
+            filter: blur(40px);
         }
 
         @media (max-width: 900px) {
             .product-highlight {
-                padding: 48px 24px !important;
-                border-radius: 20px !important;
+                padding: 48px 0px !important;
             }
 
             .ph-grid {
@@ -1459,41 +1525,49 @@
             <div class="section-head reveal">
                 <div>
                     <span class="section-label mono">Services</span>
-                    <h2>Engineered for momentum.</h2>
+                    <h2>Built for the businesses behind the business.</h2>
                 </div>
-                <p>We build robust, high performance software for startups and modern businesses. Clean architecture,
-                    resilient systems, and an obsessive focus on execution.</p>
+                <p>We don’t chase trends or build software for the sake of technology. We create systems that simplify operations, empower teams, and become long-term business assets.</p>
             </div>
 
             <div class="features reveal stagger">
                 <div class="feature" style="--i:0">
-                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                        <circle cx="12" cy="12" r="9" />
-                        <circle cx="12" cy="12" r="4.5" />
-                        <circle cx="12" cy="12" r="1" />
-                    </svg>
-                    <h3>Custom Platforms</h3>
-                    <p>Bespoke internal tools and integrations. Architected from the ground up to map perfectly to your
-                        operational workflows.</p>
-                    <span class="feature-tag mono">For businesses</span>
+                    <span class="feature-number mono">01</span>
+                    <div class="feature-content">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <h3>Think Systems</h3>
+                        <p>We don't build isolated applications. We create connected digital ecosystems that simplify operations from end to end.</p>
+                    </div>
+                    <span class="feature-tag mono">CONNECTED ECOSYSTEMS</span>
                 </div>
                 <div class="feature" style="--i:1">
-                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                        <path d="M4 4v16M4 4h12l-3 4 3 4H4" />
-                    </svg>
-                    <h3>SaaS Development</h3>
-                    <p>From initial design to production deployment. We build the interfaces, backends, and
-                        infrastructure that power modern software products.</p>
-                    <span class="feature-tag mono">For founders</span>
+                    <span class="feature-number mono">02</span>
+                    <div class="feature-content">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="2" x2="12" y2="22"></line>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        <h3>Build With Purpose</h3>
+                        <p>Every feature must solve a real business problem. If it doesn't create measurable value, it doesn't belong in the product.</p>
+                    </div>
+                    <span class="feature-tag mono">BUSINESS FIRST</span>
                 </div>
                 <div class="feature" style="--i:2">
-                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                        <path d="M3 12h13M12 5l8 7-8 7" />
-                    </svg>
-                    <h3>Continuous Support</h3>
-                    <p>Reliable maintenance after deployment. We handle performance monitoring, system upgrades, and
-                        iterative feature development as you scale.</p>
-                    <span class="feature-tag mono">For all stages</span>
+                    <span class="feature-number mono">03</span>
+                    <div class="feature-content">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 4v6h-6M1 20v-6h6"></path>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                        <h3>Evolve Constantly</h3>
+                        <p>Technology changes. Businesses change. Great software evolves with both through continuous improvement and long-term partnership.</p>
+                    </div>
+                    <span class="feature-tag mono">BUILT FOR THE FUTURE</span>
                 </div>
             </div>
         </section>
@@ -1502,9 +1576,9 @@
             <div class="section-head reveal">
                 <div>
                     <span class="section-label mono">Products</span>
-                    <h2>Software we built and still run.</h2>
+                    <h2>Built in public.</h2>
                 </div>
-                <p>A few of the products in our own portfolio built on the same process we use for client work.</p>
+                <p>We don’t just build software for clients, we build our own products too. Here’s what we’re currently creating.</p>
             </div>
 
             <div class="product-highlight reveal stagger">
