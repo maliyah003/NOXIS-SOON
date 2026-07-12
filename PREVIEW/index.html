@@ -105,6 +105,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         /* Start with scrolling locked for preloader */
@@ -696,29 +697,13 @@
         .feature {
             background: transparent;
             border: none;
-            padding: 8px 0px 8px 28px;
+            padding: 8px 0px;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: space-between;
             height: auto;
-        }
-
-        /* Left vertical accent line */
-        .feature::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 1.5px;
-            height: 32px;
-            background: rgba(31, 239, 244, 0.25);
-            transition: background-color 0.4s var(--ease);
-        }
-
-        .feature:hover::before {
-            background: var(--fletch);
         }
 
         .feature-number {
@@ -735,7 +720,8 @@
             transition: opacity 0.4s var(--ease);
         }
 
-        .feature:hover .feature-number {
+        .feature:hover .feature-number,
+        .feature.active .feature-number {
             opacity: 0.12;
         }
 
@@ -752,7 +738,8 @@
             transition: color 0.4s var(--ease);
         }
 
-        .feature:hover .feature-icon {
+        .feature:hover .feature-icon,
+        .feature.active .feature-icon {
             color: var(--fletch);
         }
 
@@ -765,7 +752,8 @@
             letter-spacing: -0.01em;
         }
 
-        .feature:hover h3 {
+        .feature:hover h3,
+        .feature.active h3 {
             color: var(--fletch);
         }
 
@@ -789,7 +777,8 @@
             transition: all 0.4s var(--ease);
         }
 
-        .feature:hover .feature-tag {
+        .feature:hover .feature-tag,
+        .feature.active .feature-tag {
             background: var(--fletch);
             color: #06282A;
             border-color: var(--fletch);
@@ -2013,6 +2002,36 @@
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
         revealEls.forEach(el => io.observe(el));
+
+        // Auto-hover features on mobile scroll
+        const features = document.querySelectorAll('.feature');
+        if (features.length > 0) {
+            const featureObserver = new IntersectionObserver((entries) => {
+                if (window.innerWidth <= 900) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        } else {
+                            entry.target.classList.remove('active');
+                        }
+                    });
+                } else {
+                    entries.forEach(entry => {
+                        entry.target.classList.remove('active');
+                    });
+                }
+            }, {
+                threshold: 0.1,
+                rootMargin: '-30% 0px -30% 0px'
+            });
+            features.forEach(f => featureObserver.observe(f));
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900) {
+                    features.forEach(f => f.classList.remove('active'));
+                }
+            });
+        }
 
 
     </script>
